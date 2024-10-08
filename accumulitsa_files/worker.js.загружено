@@ -1,0 +1,4 @@
+// const mainHeader = document.querySelector(".main-header")
+
+// if (window.scrollY === 20)
+//     mainHeader.style.position = 'fixed';

@@ -1,0 +1,682 @@
+
+.wrapper {
+    
+    width: 100%;
+}
+.content {
+    
+}
+
+html {
+    height: 100%;
+}
+body {
+    background: linear-gradient(225deg, #137A7F, #1D7B15) fixed;
+    font-family: 'Intern';
+    color: #0B0A0A;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    height: 100%;
+    position: relative;
+}
+
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+p {
+    font-size: 22px;
+}
+button:focus {
+    outline: none;
+}
+
+.contact-header {
+    background-color: #107D14;
+    font-size: 22px;
+    padding: 12px 200px;
+}
+.contact-header-prop {
+    height: 20px;
+    width: 20px;
+    background-color: red;
+    display: inline-block;
+}
+
+.contact-header-text {
+    margin-left: 8px;
+}
+.contact-header-phone-number {
+    display: inline-block;
+}
+.contact-header-email {
+    display: inline-block;
+    margin-left: 12px;
+}
+
+.void-prop {
+    margin-bottom: 40px;
+}
+.main-header {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    padding: 8px 1%;
+    width: 100%;    
+    transition: background-color 0.5s, box-shadow 0.5s;
+    z-index: 2;
+}
+
+.logo {
+    vertical-align: middle;
+}
+.nav-btns {
+    margin-left: 20px;
+    display: inline;
+}
+
+.nav-btn {
+    display: inline-block;
+    position: relative;
+    padding: 20x;
+    margin-top: 12px;
+    margin-right: 12px;
+    font-size: 28px;
+}
+
+button.dropbtn {
+    background-color: transparent;
+    border: none;
+    padding: 8px 20px;
+    transition: color 0.2s;
+}
+.nav-btn:hover button.dropbtn {
+    background-color: #144616;
+    color: #FFFFFF;
+}
+
+.nav-btn-background-hover {
+    background-color: #144616;
+    color: #FFFFFF;
+}
+
+.nav-btn button {
+    color: #1c1818;
+}
+.nav-btn.phone-number {
+    color: #1c1818;
+}
+.link-btn {
+    border: none;
+    padding: 8px 12px;
+    width: 100%;
+}
+
+
+.dropdown {
+    display: none;
+    font-size: 24px;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+.dropdown.link-btn {
+    display: block;
+}
+
+/* .nav-btn:hover .dropdown {
+    display: block;
+} */
+
+.link-btn:hover {
+    background-color: #cac0c0;
+}
+
+.nav-btn.contact {
+    padding: 20px;
+    display: flex;
+    margin: 0;
+    background-color: #fff;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.nav-btn.contact:hover {
+    background-color: #cac0c0;
+}
+
+.contact-header-text-img {
+    margin-bottom: 8px;
+    width: 20px;
+}
+
+.contact-header-text {
+    font-size: 16px;
+}
+
+
+.dropdown-contact {
+    display: none;
+    font-size: 24px;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+.nav-btn.contacts:target .dropdown-contact {
+    display: block;
+}
+
+.show {
+    display: block;
+}
+.img-wrapper {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.img-nav-btns-wrapper {
+    text-align: center;
+}
+
+.arrow {
+    border: solid white;
+    border-width: 0 7px 7px 0;
+    display: inline-block;
+    padding: 7px;
+}
+.left {
+  transform: rotate(135deg);
+  /* -webkit-transform: rotate(135deg); */
+}
+.right {
+  transform: rotate(-45deg);
+  /* -webkit-transform: rotate(-45deg); */
+}
+.circle {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+}
+#circle {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: #b5b0b0;
+    border-radius: 50%;
+}
+
+#circle.active {
+    background-color: #144616;
+    transition: background-color 2s;
+    background-color: #144616;
+}
+
+
+.text-wrapper {
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.text-wrapper p {
+    padding: 0px 240px;
+}
+
+.presentation-acc-sa {
+    margin: 20px 0 40px 0;
+}
+
+.shop-about-btns {
+    margin-top: 40px;
+    text-align: center;
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    
+}
+
+.shop-about-btns button {
+    display: inline-block;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 4px 20px;
+    border-radius: 15px;
+    border: 2px solid white;
+    font-size: 28px;
+    transition: background-color 2s, transform 1s;
+}
+
+.shop-about-btns button:hover {
+    background-color: #144616;
+    transform: scale(1.3);
+}
+
+
+.captions {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.captions li {
+    display: flex;
+    flex-shrink: 0;
+    list-style: none;
+    scroll-snap-align: start;
+    scroll-behavior: smooth;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel {
+    width: 740px;
+    margin: 0px auto 0 auto;
+    z-index: 0;
+}
+
+.carousel-inner {
+    border-radius: 15px;
+}
+
+.beauty {
+    align-items: center;
+}
+
+.beauty-img {
+    margin-top: 20px;
+}
+
+.beauty-advantages-wrapper {
+    background-color: #4ACEC2
+}
+
+.beauty-advantages {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 100px;
+}
+
+.beauty-advantages-item {
+    width: 25%;
+}
+
+.beauty-advantages-item img {
+    display: block;
+    width: 61px;
+    margin: 0 auto;
+}
+
+.beauty-advantages-item p {
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 12px;
+    font-size: 16px;
+}
+
+.beauty-advantages-heading {
+    padding: 24px;
+}
+
+.beauty-advantages-item.last-line {
+    margin-top: 20px
+}
+
+.youtube-video {
+    display: block;
+    margin: 40px auto;
+    
+}
+.youtube-video.about-cofee {
+    margin: 40px auto 0px auto;
+}
+
+.shop-about-btns.about-cofee {
+    margin-bottom: 160px;
+}
+
+.youtube-video.about-company {
+    margin-bottom: 280px;
+}
+
+.youtube-video.about-acc-sa {
+
+}
+
+.youtube-video.aboutcompany
+{
+    margin: 100px auto 0 auto
+}
+.cofee-img {
+    display: block;
+    margin: 80px auto 0 auto;
+}
+
+.cofee-advantages {
+    list-style: url(media/main-page/images/main-page/check.png);
+    font-size: 20px;
+    color: #FFFFFF;
+}
+.cofee-advantages-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+hr {
+    background-color: #FFFFFF;
+}
+.accumulit-sa-item {
+    margin: 40px 160px 40px 160px;
+}
+.accumulit-sa-item img {
+    width: 220px;
+    display: inline;
+    float: left;
+    margin-right: 20px;
+}
+
+.accumulit-sa-item-dscrp {
+    display: inline;
+    color: #fff;
+    font-size: 22px;
+
+}
+.advantage-list {
+    list-style: url(media/main-page/images/main-page/check.png);
+    color: #fff;
+    font-size: 22px;
+    display: inline-block;
+    padding-left: 0;
+}
+
+.acc-sa-composition {
+    color: white;
+    display: block;
+    font-size: 18px;
+    padding: 0 8px;
+    margin: 20px 16px 20px 16px;
+}
+
+.acc-sa-composition-wrapper {
+    display: none;
+}
+
+.show {
+    display: block;
+    scroll-margin-bottom : 20px;
+    scroll-snap-align: none start;
+}
+
+
+
+#acc-sa-details {
+    cursor: pointer;
+    display: inline-block;
+    font-size: 18px;
+    padding: 8px;
+    margin: 16px;
+    transition: transform 2s, background-color 2s;
+    border-radius: 5%;
+}
+#acc-sa-details:hover {
+    transform: scale(1.3);
+    background-color: #144616;
+}
+
+.ingredient-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+.ingredient-item {
+    width: 25%;
+}
+
+.ingredient-item img {
+    display: block;
+    float: none;
+    width: 60px;
+    margin: 0 auto;
+}
+.ingredient-img-wrapper img {
+    float: none;
+    margin: 0 auto;
+}
+.ingredient-item p {
+    font-size: 16px;
+    display: block;
+    text-align: center;
+}
+
+
+
+footer {
+    width: 100%;
+    background-color: #3e8e41;
+    margin-top: 40px;
+    padding: 20px 200px;
+
+}
+footer p {
+    position: relative;
+    margin: 0;
+}
+
+.void-prop {
+    width: 100%;
+}
+ 
+
+.beauty-item, .beauty-technologies {
+  display: flex;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.beauty-technologies h1 {
+    margin: 0 240px 40px 240px;
+    text-align: center;
+}
+
+
+.beauty-technologies hr {
+    background-color: #FFFFFF;
+    width: 60%;
+}
+
+.beauty-technology {
+    margin: 0 240px;
+    text-align: center;
+}
+.beauty-technology span {
+    color: #4ACEC2;
+}
+
+.heading-of-level-2 {
+    display: block;
+    margin-top: 80px;
+    text-align: center;
+    color: #fff;
+}
+
+.beauty-item {
+    margin: 60px 240px 0 240px;
+}
+
+.beauty-item img {
+    width: 160px;
+}
+.beauty-item-img-name {
+    margin: 20px 0;
+}
+
+.beauty-item-dscr {
+    text-align: center;
+}
+
+.beauty-item-list-name {
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+.beauty-item-advantages {
+    font-size: 22px;
+}
+
+.beauty-item-usage {
+    text-align: center;
+}
+.beauty-item-usage .usage-button {
+    display: inline-block;
+    font-size: 24px;
+    margin: 20px 0;
+    padding: 20px;
+    color:#4ACEC2;
+    background-color: transparent;
+    border: 3px solid #4ACEC2;
+    border-radius: 20px;
+    transition: transform 2s, color 0.2s, background-color 2s;
+}
+
+.beauty-item-usage .usage-button:hover {
+    transform: scale(1.2);
+    background-color: #4ACEC2;
+    color:#1a3c39;
+}
+
+
+.usage {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+@media screen and (max-width: 1401px) {
+    .logo {
+        width: 140px;
+        height: 48px;
+        vertical-align: bottom;
+        margin-top: 10px;
+    }
+    .nav-btn {
+        font-size: 24px;
+        margin-right: 32px;
+    }
+}
+
+
+@media screen and (max-width: 1344px) {
+    .logo {
+        width: 140px;
+        height: 48px;
+        vertical-align: bottom;
+        margin-top: 10px;
+    }
+    .nav-btn {
+        font-size: 20px;
+        margin-right: 32px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .beauty-item-img img {
+        
+        width: 120px;
+    }
+    .beauty-technologies h1 {
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+    .beauty-technology {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    .beauty-item {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    .logo {
+        width: 140px;
+        height: 48px;
+        vertical-align: bottom;
+        margin-top: 4px;
+    }
+    .contact-header-text {
+        font-size: 12px;
+    }
+    .nav-btn {
+        font-size: 16px;
+        margin-right: 24px;
+    }
+    .link-btn {
+        font-size: 16px;
+        padding: 12px;
+    }
+    .text-wrapper p {
+        padding: 0 40px;
+    }
+    .phone-img {
+        width: 20px;
+    }
+    footer {
+        text-align: left;
+        padding: 20px 40px;
+    }
+}
+
+
+
+@media  screen and (max-width: 768px) {
+    .carousel {
+        width: 550px;
+    }
+    .carousel-item img {
+        width: 550px;
+        height: 350px; 
+    }
+    .americano.shop-about-btns {
+        padding: 20px;
+    }
+    .logo {
+        margin-top: 8px
+    }
+    .nav-btn {
+        margin-top: 0px;
+    }
+    .text-wrapper p {
+        padding: 0 40px;
+    }
+    .shop-about-btns {
+        gap: 20px;
+    }
+    .shop-about-btns button {
+        font-size: 20px
+    }
+    .shop-about-btns button:hover {
+        transform: scale(1.1);
+    }
+
+    footer {
+        text-align: left;
+        padding: 20px 40px;
+    }
+    .accumulit-sa-item {
+        margin: 40px ;
+    }
+
+}  
