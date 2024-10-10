@@ -292,13 +292,13 @@ function mainPage() {
     `;
     footer.style.position = 'static'
     window.scrollTo(0,0)
-    window.history.pushState('',"",'/')
+    window.history.pushState('',"",'aplgo-partner/')
 }
 
 function aboutAccSa() {
     if (document.onPage == 2)
         return undefined;
-    window.history.pushState('', '', '/accumulitsa')
+    window.history.pushState('', '', 'aplgo-partner/accumulitsa')
     document.onPage = 2;
     content.innerHTML = `
     <div class="youtube-video-wrapper about-accsa">
@@ -1745,7 +1745,7 @@ function aboutAccSa() {
 function aboutCofee() {
     if (document.onPage == 3)
         return undefined;
-    window.history.pushState('', '', '/cofee')
+    window.history.pushState('', '', 'aplgo-partner/cofee')
     document.onPage = 3;
     content.innerHTML = `
     <div class="youtube-video-wrapper">
@@ -1766,7 +1766,7 @@ function aboutCofee() {
 function aboutCompany() {
     if (document.onPage == 4)
         return undefined;
-    window.history.pushState('', '', '/company')
+    window.history.pushState('', '', 'aplgo-partner/company')
     document.onPage = 4;
     content.innerHTML = `
     <div class="youtube-video-wrapper about-company">
@@ -1785,7 +1785,7 @@ function travelling() {
     if (document.onPage == 5)
         return undefined;
     document.onPage = 5;
-    window.history.pushState('', '', '/trips')
+    window.history.pushState('', '', 'aplgo-partner/trips')
     content.innerHTML = `
     <div class="youtube-video-wrapper travelling">
     <div class="youtube-video-container">
@@ -2149,7 +2149,7 @@ function aboutBeauty() {
     </div>
 
     `;
-    window.history.pushState('', '', '/beauty')
+    window.history.pushState('', '', 'aplgo-partner/beauty')
     document.querySelector('.dropdown').style.display = 'none';
     window.scrollTo(0,0)
     document.querySelectorAll('.usage-button').forEach((el) => el.addEventListener('click', (event) => {
