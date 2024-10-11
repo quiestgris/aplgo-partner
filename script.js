@@ -17,6 +17,9 @@ window.onclick = function (event) {
     }
 }
 
+
+const currentUrl = window.location.href;
+
 const mainHeader = document.querySelector(".main-header")
 const contactHeader = document.querySelector('.contact-header')
 const voidProp = document.getElementById('void-prop')
@@ -292,13 +295,13 @@ function mainPage() {
     `;
     footer.style.position = 'static'
     window.scrollTo(0,0)
-    window.history.pushState('',"",'aplgo-partner/')
+    window.history.replaceState('',"",currentUrl)
 }
 
 function aboutAccSa() {
     if (document.onPage == 2)
         return undefined;
-    window.history.pushState('', '', 'aplgo-partner/accumulitsa')
+    window.history.replaceState('', '', currentUrl + 'accumulitsa')
     document.onPage = 2;
     content.innerHTML = `
     <div class="youtube-video-wrapper about-accsa">
@@ -1745,7 +1748,7 @@ function aboutAccSa() {
 function aboutCofee() {
     if (document.onPage == 3)
         return undefined;
-    window.history.pushState('', '', 'aplgo-partner/cofee')
+    window.history.replaceState('', '', currentUrl + 'americano-cofee')
     document.onPage = 3;
     content.innerHTML = `
     <div class="youtube-video-wrapper">
@@ -1766,7 +1769,7 @@ function aboutCofee() {
 function aboutCompany() {
     if (document.onPage == 4)
         return undefined;
-    window.history.pushState('', '', 'aplgo-partner/company')
+    window.history.replaceState('', '', currentUrl + 'company')
     document.onPage = 4;
     content.innerHTML = `
     <div class="youtube-video-wrapper about-company">
@@ -1785,7 +1788,7 @@ function travelling() {
     if (document.onPage == 5)
         return undefined;
     document.onPage = 5;
-    window.history.pushState('', '', 'aplgo-partner/trips')
+    window.history.replaceState('', '', currentUrl + 'travels')
     content.innerHTML = `
     <div class="youtube-video-wrapper travelling">
     <div class="youtube-video-container">
@@ -2149,7 +2152,7 @@ function aboutBeauty() {
     </div>
 
     `;
-    window.history.pushState('', '', 'aplgo-partner/beauty')
+    window.history.replaceState('', '', currentUrl + 'beauty')
     document.querySelector('.dropdown').style.display = 'none';
     window.scrollTo(0,0)
     document.querySelectorAll('.usage-button').forEach((el) => el.addEventListener('click', (event) => {
@@ -2158,3 +2161,9 @@ function aboutBeauty() {
     
     footer.style.position = 'static'
 }
+
+if (document.referrer == (currentUrl + "accumulitsa")) aboutAccSa();
+if (document.referrer == (currentUrl + "beauty")) aboutBeauty();
+if (document.referrer == (currentUrl + "americano-cofee")) aboutCofee();
+if (document.referrer == (currentUrl + "company")) aboutCompany();
+if (document.referrer == (currentUrl + "travels")) travelling();
