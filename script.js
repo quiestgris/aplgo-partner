@@ -2162,8 +2162,8 @@ function aboutBeauty() {
     footer.style.position = 'static'
 }
 
-if (document.referrer == (currentUrl + "accumulitsa")) aboutAccSa();
-if (document.referrer == (currentUrl + "beauty")) aboutBeauty();
-if (document.referrer == (currentUrl + "americano-cofee")) aboutCofee();
-if (document.referrer == (currentUrl + "company")) aboutCompany();
-if (document.referrer == (currentUrl + "travels")) travelling();
+if (document.referrer == (currentUrl + "accumulitsa/")) aboutAccSa();
+if (document.referrer == (currentUrl + "beauty/")) aboutBeauty();
+if (document.referrer == (currentUrl + "americano-cofee/")) aboutCofee();
+if (document.referrer == (currentUrl + "company/")) aboutCompany();
+if (document.referrer == (currentUrl + "travels/")) travelling();
