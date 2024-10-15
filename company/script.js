@@ -2,7 +2,7 @@ document.querySelectorAll('a').forEach(function (el) {
     el.setAttribute('target', '_blank');
 })
 checkWindowWidth();
-if (window.innerWidth <= 574) {
+if (window.innerWidth > 574) {
     document.querySelector('.nav-btn.contacts').addEventListener('click', () => {
         document.querySelector('.dropdown-contact').classList.add('show')
         document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "#144616";
@@ -20,6 +20,8 @@ let removingContactsByclickingOnAnotherPlace = function (event) {
 }
 
 window.addEventListener("click", removingContactsByclickingOnAnotherPlace);
+
+
 
 const currentUrl = window.location.href.replace("company/","");
 
@@ -207,13 +209,17 @@ function clickBurgerMenu() {
     }
 }
 
-document.querySelector('#about-products.nav-btn').addEventListener('mouseover', function () {
-    document.querySelector('.dropdown').style.display = 'block';
-})
+if (window.innerWidth > 574) {
+    document.querySelector('#about-products.nav-btn').addEventListener('mouseover', function () {
+        document.querySelector('.dropdown').style.display = 'block';
+    })
+}
 
-document.querySelector('#about-products.nav-btn').addEventListener('mouseout', function () {
-    document.querySelector('.dropdown').style.display = '';
-})
+if (window.innerWidth > 574) {
+    document.querySelector('#about-products.nav-btn').addEventListener('mouseout', function () {
+        document.querySelector('.dropdown').style.display = '';
+    })
+}
 
 // document.querySelectorAll('.link-btn').forEach(function (el) {
 //     el.addEventListener('click', function () {
@@ -223,9 +229,9 @@ document.querySelector('#about-products.nav-btn').addEventListener('mouseout', f
 
 window.addEventListener('scroll', headerTransformation);
 
-voidProp.style.height = mainHeader.offsetHeight + 'px';
+if (window.innerWidth > 574) { voidProp.style.height = mainHeader.offsetHeight + 'px'; }
 // voidProp.style.width = mainHeader.offsetWidth + 'px';
-voidProp.style.marginBottom = 28 + 'px'
+if (window.innerWidth > 574) { voidProp.style.marginBottom = 28 + 'px' }
 
 document.addEventListener('DOMContentLoaded', () => {
     checkWindowWidth();
@@ -237,21 +243,22 @@ function checkWindowWidth() {
         const voidProp = document.getElementById('void-prop')
         const mainHeader = document.querySelector(".main-header")
         let removingContactsByclickingOnAnotherPlace = function (event) {
-    if (window.innerWidth <= 574) return undefined;
-    if (!(event.target.matches('.nav-btn.contacts button') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact img') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact span')))
-    {
-        document.querySelector('.dropdown-contact').classList.remove('show')
-        document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "";
-        document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "";
-    }
+            if (window.innerWidth <= 574) return undefined;
+            if (!(event.target.matches('.nav-btn.contacts button') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact img') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact span')))
+            {
+                document.querySelector('.dropdown-contact').classList.remove('show')
+                document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "";
+                document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "";
+            }
         }
         window.removeEventListener("click", removingContactsByclickingOnAnotherPlace);
 
         let newHeader = document.createElement("div")
         newHeader.classList.add("img-logo-container")
         window.removeEventListener('scroll', headerTransformation)
-        voidProp.replaceWith(newHeader)
-        newHeader.innerHTML = `<img class="logo" src="../media/main-page/images/main-page/slogan5.png">`;
+        newHeader.innerHTML = `<img class="logo" src="https://quiestgris.github.io/aplgo-partner/media/main-page/images/main-page/slogan5.png">`;
+        // voidProp.replaceWith(newHeader)
+        voidProp.parentNode.replaceChild(newHeader, voidProp);
         mainHeader.innerHTML = `
        <button class="mobile-menu" onclick="clickBurgerMenu();">Меню</button> 
     <!--<div class="burger" onclick="clickBurgerMenu()">
@@ -2273,9 +2280,3 @@ function aboutBeauty() {
     footer.style.position = 'static'
 }
 
-
-if (document.referrer == (currentUrl + "accumulitsa/")) aboutAccSa();
-if (document.referrer == (currentUrl + "beauty/")) aboutBeauty();
-if (document.referrer == (currentUrl + "americano-cofee/")) aboutCofee();
-if (document.referrer == (currentUrl + "company/")) aboutCompany();
-if (document.referrer == (currentUrl + "travels/")) travelling();
