@@ -2,12 +2,13 @@ document.querySelectorAll('a').forEach(function (el) {
     el.setAttribute('target', '_blank');
 })
 checkWindowWidth();
-document.querySelector('.nav-btn.contacts').addEventListener('click', () => {
-    document.querySelector('.dropdown-contact').classList.add('show')
-    document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "#144616";
-    document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "#FFFFFF";
-})
-
+if (window.innerWidth <= 574) {
+    document.querySelector('.nav-btn.contacts').addEventListener('click', () => {
+        document.querySelector('.dropdown-contact').classList.add('show')
+        document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "#144616";
+        document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "#FFFFFF";
+    })
+}
 let removingContactsByclickingOnAnotherPlace = function (event) {
     if (window.innerWidth <= 574) return undefined;
     if (!(event.target.matches('.nav-btn.contacts button') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact img') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact span')))
@@ -75,6 +76,9 @@ function handleBurgerScroll() {
 }
 
 function disableScroll() {
+    const burgerMenu = document.querySelector('.burger-menu');
+
+
     window.addEventListener('wheel', preventScroll, { passive: false });
     window.addEventListener('touchmove', preventScroll, { passive: false });
     window.addEventListener('scroll', preventScroll, { passive: false });
@@ -89,6 +93,8 @@ function disableScroll() {
 }
 
 function enableScroll() {
+    const burgerMenu = document.querySelector('.burger-menu');
+
     window.removeEventListener('wheel', preventScroll, { passive: false });
     window.removeEventListener('touchmove', preventScroll, { passive: false });
     window.removeEventListener('scroll', preventScroll, { passive: false });
@@ -107,6 +113,8 @@ function highlightsBurgerBtns () {
 }
 
 function disableScrollOfBurgerMenu() {
+    const burgerMenu = document.querySelector('.burger-menu');
+
     if (burgerMenu.style.display = "block") {
         if ((burgerMenu.clientHeight + burgerMenu.scrollTop) >= burgerMenu.scrollHeight) {
             console.log("here we go")
@@ -169,6 +177,8 @@ function clickBurgerMenu() {
     document.clickedBurgerMenu = !document.clickedBurgerMenu;
     const background = document.querySelector('.burger-menu-background');
     const menu = document.querySelector('.burger-menu');
+    const burgerMenu = document.querySelector('.burger-menu');
+
     window.onclick = function () { };
 
     if (document.clickedBurgerMenu) {
@@ -225,9 +235,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function checkWindowWidth() {
     if (window.innerWidth <= 574) {
         window.overflowY = "hidden"
+        const voidProp = document.getElementById('void-prop')
+        const mainHeader = document.querySelector(".main-header")
+        let removingContactsByclickingOnAnotherPlace = function (event) {
+    if (window.innerWidth <= 574) return undefined;
+    if (!(event.target.matches('.nav-btn.contacts button') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact img') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact span')))
+    {
+        document.querySelector('.dropdown-contact').classList.remove('show')
+        document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "";
+        document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "";
+    }
+        }
+        window.removeEventListener("click", removingContactsByclickingOnAnotherPlace);
+
         let newHeader = document.createElement("div")
         newHeader.classList.add("img-logo-container")
-        removingContactsByclickingOnAnotherPlace = null;
         window.removeEventListener('scroll', headerTransformation)
         voidProp.replaceWith(newHeader)
         newHeader.innerHTML = `<img class="logo" src="../media/main-page/images/main-page/slogan5.png">`;
@@ -280,19 +302,19 @@ function mainPage() {
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                    <img src="../media/main-page/images/main-page/carousel/photo_2024-05-14_21-57-22.jpg" class="d-block w-350" width="740px" height="540px">
+                    <img src="media/main-page/images/main-page/carousel/photo_2024-05-14_21-57-22.jpg" class="d-block w-350" width="740px" height="540px">
                     </div>
                     <div class="carousel-item">
-                    <img src="../media/main-page/images/main-page/BEAUTY/finallyChangedBEAUTY.jpg" class="d-block w-350" width="740px" height="540px">
+                    <img src="media/main-page/images/main-page/BEAUTY/finallyChangedBEAUTY.jpg" class="d-block w-350" width="740px" height="540px">
                     </div>
                     <div class="carousel-item">
-                    <img src="../media/main-page/images/main-page/carousel/photo_2024-05-14_22-01-10.jpg" class="d-block w-350" width="740px" height="540">
+                    <img src="media/main-page/images/main-page/carousel/photo_2024-05-14_22-01-10.jpg" class="d-block w-350" width="740px" height="540">
                     </div>
                     
                 </div>
             </div>
             <div class="text-wrapper" style=" margin-top: 20px;"><h1>Восстановление организма</h1></div>
-            <div class="img-wrapper"><img class="accsa-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/product_categories_acc_sa.png"/></div>
+            <div class="img-wrapper"><img class="accsa-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/product_categories_acc_sa.png"/></div>
             <div class="text-wrapper"><h2>Драже Accumulit SA</h2></div>
             <div class="text-wrapper"><p>На вкус — как любимые леденцы из детства…, но «драже» APL, обладая мощным оздоровительным эффектом, несут колоссальную пользу и энергию, т.к. в них сконцентрирована вся сила природы. Их «рецептура» дает нашим клеткам жизненно-важный строительный материал, включающий в организме режим коррекции, наполняет его резервами для полного восстановления.</p>
             </div>
@@ -303,42 +325,42 @@ function mainPage() {
             </div>
             </div>
             <div class="beauty">
-                <div class="img-wrapper"><img class="beauty-img" src="../media/main-page/images/main-page/main-page-categories/beauty/Beauty.png" width="550"/></div>
+                <div class="img-wrapper"><img class="beauty-img" src="media/main-page/images/main-page/main-page-categories/beauty/Beauty.png" width="550"/></div>
                 <div class="text-wrapper"><h2>Косметика Beauty Natural Series</h2></div>
                 <div class="text-wrapper"><p>Совместно с мировыми экспертами в области медицинской косметологии мы разработали уникальный умный состав косметики, который объединяет в себе бережные химические формулы и все преимущества природных компонентов, а также инновации многолетних разработок в области косметики. Мы сумели так улучшить и усилить состав, что теперь косметика дает не только длительный, но и быстрый эффект</p></div>
                 <div class="beauty-advantages-wrapper">
                     <div class="text-wrapper"><h2 class="beauty-advantages-heading">Коротко о косметике Beauty Natural Series</h2></div>
                     <article class="beauty-advantages">
                         <div class="beauty-advantages-item">
-                            <img src="../media/main-page/images/main-page/beauty-characteristics/paraben.svg"/>
+                            <img src="media/main-page/images/main-page/beauty-characteristics/paraben.svg"/>
                             <p>0% парабенов</p>
                         </div>
                         <div class="beauty-advantages-item">
-                            <img src="../media/main-page/images/main-page/beauty-characteristics/phtalat.svg"/>
+                            <img src="media/main-page/images/main-page/beauty-characteristics/phtalat.svg"/>
                             <p>0% фталата</p>
                         </div>
                         <div class="beauty-advantages-item">
-                            <img src="../media/main-page/images/main-page/beauty-characteristics/vaselin.svg"/>
+                            <img src="media/main-page/images/main-page/beauty-characteristics/vaselin.svg"/>
                             <p>0% вазелина</p>
                         </div>
                         <div class="beauty-advantages-item">
-                            <img src="../media/main-page/images/main-page/beauty-characteristics/phormaldegid.svg"/>
+                            <img src="media/main-page/images/main-page/beauty-characteristics/phormaldegid.svg"/>
                             <p>0% формальдегида</p>
                         </div>
                         <div class="beauty-advantages-item last-line">
-                            <img src="../media/main-page/images/main-page/beauty-characteristics/oil.svg"/>
+                            <img src="media/main-page/images/main-page/beauty-characteristics/oil.svg"/>
                             <p>0% нефти и мазута</p>
                         </div>
                         <div class="beauty-advantages-item last-line">
-                            <img src="../media/main-page/images/main-page/beauty-characteristics/syntetic pillows.svg"/>
+                            <img src="media/main-page/images/main-page/beauty-characteristics/syntetic pillows.svg"/>
                             <p>0% синтетических подушек</p>
                         </div>
                         <div class="beauty-advantages-item last-line">
-                            <img src="../media/main-page/images/main-page/beauty-characteristics/microplactic.svg"/>
+                            <img src="media/main-page/images/main-page/beauty-characteristics/microplactic.svg"/>
                             <p>0% микропластика</p>
                         </div>
                         <div class="beauty-advantages-item last-line">
-                            <img src="../media/main-page/images/main-page/beauty-characteristics/svgexport-21.svg"/>
+                            <img src="media/main-page/images/main-page/beauty-characteristics/svgexport-21.svg"/>
                             <p>Мы не тестируем нашу продукцию на животных</p>
                         </div>
                     </article>
@@ -353,7 +375,7 @@ function mainPage() {
                     </div>
                 </div>
             <div class="americano">
-                <img class="cofee-img" src="../media/main-page/images/main-page/main-page-categories/cofee/goods_2.png"/>
+                <img class="cofee-img" src="media/main-page/images/main-page/main-page-categories/cofee/goods_2.png"/>
                 <div class="text-wrapper"><h2>Натуральный кофе Американо</h2></div>
                 <div class="text-wrapper"><p>Наш кофе изготовлен по современной технологии сублимации Freezе dried <br/>«сушка замораживанием», благодаря чему он сохранил все натуральные вещества, обладает тонким изысканным вкусом и ароматом.</p></div>
                 <div class="text-wrapper"><p>Преимущества нашего кофе:</p></div>
@@ -401,7 +423,7 @@ function aboutAccSa() {
     </div>    
     <div class="text-wrapper"><h2 class="presentation-acc-sa">ТОП НА КАЖДЫЙ ДЕНЬ</h2></div>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/grw_16638488253805.png" title="Драже GRW"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/grw_16638488253805.png" title="Драже GRW"/>
                 <p class="accumulit-sa-item-dscrp">GRW – это витаминно-минеральный комплекс из 320 различных антиоксидантов. Драже помогают укреплять иммунитет, способствуют быстрому восстановлению сил и ускорению выздоровления.</p>
                 <ul class="advantage-list">
                     <li>
@@ -433,55 +455,55 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/3.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/3.png"/>
                                 <p>Астрагал</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/10.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/10.png"/>
                                 <p>Смородина черная</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/11.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/11.png"/>
                                 <p>Рябина красная</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/17.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/17.png"/>
                                 <p>Клюква</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/24.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/24.png"/>
                                 <p>Олива</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/25.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/25.png"/>
                                 <p>Эхинация</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/26.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/26.png"/>
                                 <p>Ганодерма</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/27.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/27.png"/>
                                 <p>Момордика харанция</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/28.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/28.png"/>
                                 <p>Алоэ вера</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/29.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/29.png"/>
                                 <p>Черника</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/30.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/30.png"/>
                                 <p>Гранат</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/31.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/31.png"/>
                                 <p>Физалис земляничный</p>
                             </div>
                             <div style="text-align: center;" class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GRW/3.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GRW/3.png"/>
                                 <p>Витания</p>
                             </div>
                         </div>
@@ -490,7 +512,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/gts-2_16638488415048.png" title="Драже GTS"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/gts-2_16638488415048.png" title="Драже GTS"/>
                 <p class="accumulit-sa-item-dscrp">GTS представляет собой эффективную смесь витаминов, минералов и растительных компонентов, которая наполняет организм мощной жизненной энергией и готовит к новым подвигам!</p>
                 <ul class="advantage-list">
                     <li>
@@ -522,35 +544,35 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                     <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GTS/1.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GTS/1.png"/>
                                 <p>Зеленый чай</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GTS/32.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GTS/32.png"/>
                                 <p>Элеутерококк</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GTS/33.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GTS/33.png"/>
                                 <p>Лимонник</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GTS/34.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GTS/34.png"/>
                                 <p>Бакопа монье</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GTS/35.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GTS/35.png"/>
                                 <p>Ананас</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GTS/36.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GTS/36.png"/>
                                 <p>Крыжовник</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GTS/37.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GTS/37.png"/>
                                 <p>Яблоко</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/GTS/79.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/GTS/79.png"/>
                                 <p>Витания</p>
                             </div>
                         </div>
@@ -559,7 +581,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/nrm-2_16638488945595.png" title="Драже NRM"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/nrm-2_16638488945595.png" title="Драже NRM"/>
                 <p class="accumulit-sa-item-dscrp">Аккумулированные драже NRM – верный помощник тех, кто ведет борьбу с сахарным диабетом. В нем содержатся экстракты многих ценных целебных растений и плодов из разных уголков планеты!</p>
                 <ul class="advantage-list">
                     <li>
@@ -591,31 +613,31 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                     <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/NRM/27.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/NRM/27.png"/>
                                 <p>Момордика харанция</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/NRM/32.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/NRM/32.png"/>
                                 <p>Элеутерококк</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/NRM/37.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/NRM/37.png"/>
                                 <p>Яблоко</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/NRM/38.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/NRM/38.png"/>
                                 <p>Гарциния</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/NRM/39.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/NRM/39.png"/>
                                 <p>Джимнема сильвестра</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/NRM/40.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/NRM/40.png"/>
                                 <p>Пажитник сенной</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/NRM/41.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/NRM/41.png"/>
                                 <p>Личи</p>
                             </div>
                         </div>
@@ -624,7 +646,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/pwr-m-2_16638488567117.png" title="Драже PWRman"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/pwr-m-2_16638488567117.png" title="Драже PWRman"/>
                 <p class="accumulit-sa-item-dscrp">Сексуальное здоровье – важная составляющая жизни мужчины. APL® GO предлагает продукт для мужского здоровья, который отлаживает все процессы в мужском организме, придает силу и бодрость.</p>
                 <ul class="advantage-list">
                     <li>
@@ -654,31 +676,31 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                     <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWRman/4.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWRman/4.png"/>
                                 <p>Имбирь</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWRman/18.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWRman/18.png"/>
                                 <p>Лимон</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWRman/30.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWRman/30.png"/>
                                 <p>Гранат</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWRman/42.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWRman/42.png"/>
                                 <p>Женьшень</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWRman/43.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWRman/43.png"/>
                                 <p>Тернера</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWRman/44.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWRman/44.png"/>
                                 <p>Инжир</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWRman/79.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWRman/79.png"/>
                                 <p>Витания</p>
                             </div>
                         </div>
@@ -687,7 +709,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/pwr-2_16638489850011.png" title="Драже PWRwoman"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/pwr-2_16638489850011.png" title="Драже PWRwoman"/>
                 <p class="accumulit-sa-item-dscrp">Часто пары страдают от расстройств интимной сферы. Компания APL® GO предлагает парный продукт. PWR woman стабилизирует женский организм и нормализует энергетический баланс.</p>
                 <ul class="advantage-list">
                     <li>
@@ -719,27 +741,27 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                     <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWR/4.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWR/4.png"/>
                                 <p>Имбирь</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWR/23.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWR/23.png"/>
                                 <p>Гинкго билоба</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWR/43.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWR/43.png"/>
                                 <p>Тернера</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWR/45.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWR/45.png"/>
                                 <p>Спаржа</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWR/46.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWR/46.png"/>
                                 <p>Абрикос</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PWR/79.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PWR/79.png"/>
                                 <p>Витания</p>
                             </div>
                         </div>
@@ -748,7 +770,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/rlx-2_16638489958592.png"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/rlx-2_16638489958592.png"/>
                 <p class="accumulit-sa-item-dscrp">Драже RLX – это уникальный комплекс экстрактов растений, который помогает справиться с любыми проявлениями стресса, защищая организм от нервного напряжения и перегрузок.</p>
                 <ul class="advantage-list">
                     <li>
@@ -780,31 +802,31 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                     <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/RLX/9.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/RLX/9.png"/>
                                 <p>Кедровый орех</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/RLX/32.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/RLX/32.png"/>
                                 <p>Элеутерококк</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/RLX/47.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/RLX/47.png"/>
                                 <p>Ромашка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/RLX/48.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/RLX/48.png"/>
                                 <p>Пассифлора</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/RLX/49.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/RLX/49.png"/>
                                 <p>Банан</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/RLX/50.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/RLX/50.png"/>
                                 <p>Латук обыкновенный</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/RLX/79.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/RLX/79.png"/>
                                 <p>Витания</p>
                             </div>
                         </div>
@@ -813,7 +835,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/sld-2_16638490133829.png"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/sld-2_16638490133829.png"/>
                 <p class="accumulit-sa-item-dscrp">SLD – это комплекс из эффективных компонентов, сочетание которых идеально подходит для правильной и слаженной работы суставов. Вам не придется отказываться от любимых пеших прогулок.</p>
                 <ul class="advantage-list">
                     <li>
@@ -845,31 +867,31 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                     <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/SLD/1.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/SLD/1.png"/>
                                 <p>Зеленый чай</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/SLD/4.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/SLD/4.png"/>
                                 <p>Имбирь</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/SLD/5.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/SLD/5.png"/>
                                 <p>Солодка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/SLD/51.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/SLD/51.png"/>
                                 <p>Гарпагофитум</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/SLD/52.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/SLD/52.png"/>
                                 <p>Куркума</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/SLD/53.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/SLD/53.png"/>
                                 <p>Груша</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/SLD/54.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/SLD/54.png"/>
                                 <p>Земляника</p>
                             </div>
                         </div>
@@ -878,7 +900,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/stp-2_16638490824081.png"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/stp-2_16638490824081.png"/>
                 <p class="accumulit-sa-item-dscrp">Компания APL® GO уверена: с болью можно справиться безопасным способом. Драже STP за счет своего противовоспалительного действия избавляет от причины болевых ощущений.</p>
                 <ul class="advantage-list">
                     <li>
@@ -910,35 +932,35 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                     <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/STP/4.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/STP/4.png"/>
                                 <p>Имбирь</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/STP/5.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/STP/5.png"/>
                                 <p>Солодка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/STP/51.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/STP/51.png"/>
                                 <p>Гарпагофитум</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/STP/52.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/STP/52.png"/>
                                 <p>Куркума</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/STP/55.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/STP/55.png"/>
                                 <p>Перец стручковый</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/STP/56.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/STP/56.png"/>
                                 <p>Вишня</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/STP/57.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/STP/57.png"/>
                                 <p>Малина</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/STP/79.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/STP/79.png"/>
                                 <p>Витания</p>
                             </div>
                         </div>
@@ -947,7 +969,7 @@ function aboutAccSa() {
             </article>
             <div class="text-wrapper"><h2 class="presentation-acc-sa">ТОП ПРЕМИУМ</h2></div>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/alt-2_16638487365215.png" title="Драже ALT"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/alt-2_16638487365215.png" title="Драже ALT"/>
                 <p class="accumulit-sa-item-dscrp">Аллергические заболевания плохо поддаются лечению традиционными способами. Драже ALT – это смесь наиболее эффективных натуральных ингредиентов, действующих сообща против аллергии.</p>
                 <ul class="advantage-list">
                     <li>
@@ -979,47 +1001,47 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/1.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/1.png"/>
                                 <p>Зеленый чай</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/2.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/2.png"/>
                                 <p>Шлемник</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/3.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/3.png"/>
                                 <p>Астрагал</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/4.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/4.png"/>
                                 <p>Имбирь</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/5.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/5.png"/>
                                 <p>Солодка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/6.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/6.png"/>
                                 <p>Эвкалипт</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/7.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/7.png"/>
                                 <p>Мангостин</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/8.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/8.png"/>
                                 <p>Виноград</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/9.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/9.png"/>
                                 <p>Кедровый орех</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/10.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/10.png"/>
                                 <p>Смородина черная</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ALT/11.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ALT/11.png"/>
                                 <p>Рябина красная</p>
                             </div>
                         </div>
@@ -1028,7 +1050,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/mls_16469082891528 (1).png" title="Драже MLS"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/mls_16469082891528 (1).png" title="Драже MLS"/>
                 <p class="accumulit-sa-item-dscrp">По данным ВОЗ, до 80% заболеваний человека напрямую вызываются паразитами! APL® GO предлагает противопаразитарный комплекс MLS для избавления от паразитов раз и навсегда!</p>
                 <ul class="advantage-list">
                     <li>
@@ -1060,83 +1082,83 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/4.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/4.png"/>
                                 <p>Имбирь</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/5.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/5.png"/>
                                 <p>Солодка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/9.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/9.png"/>
                                 <p>Кедровый орех</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/10.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/10.png"/>
                                 <p>Смородина черная</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/17.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/17.png"/>
                                 <p>Клюква</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/25.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/25.png"/>
                                 <p>Эхинацея</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/40.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/40.png"/>
                                 <p>Пажитник сенной</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/47.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/47.png"/>
                                 <p>Ромашка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/52.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/52.png"/>
                                 <p>Куркума</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/58.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/58.png"/>
                                 <p>Тимьян</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/59.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/59.png"/>
                                 <p>Корица</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/60.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/60.png"/>
                                 <p>Гвоздика</p>
                             </div>
                             <div style="text-align: center;" class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/61.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/61.png"/>
                                 <p>Артишок</p>
                             </div>
                             <div style="text-align: center;" class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/62.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/62.png"/>
                                 <p>Одуванчик</p>
                             </div>
                             <div style="text-align: center;" class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/63.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/63.png"/>
                                 <p>Кориандр</p>
                             </div>
                             <div style="text-align: center;" class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/64.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/64.png"/>
                                 <p>Тыквенные семечки</p>
                             </div>
                             <div style="text-align: center;" class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/65.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/65.png"/>
                                 <p>Папая</p>
                             </div>
                             <div style="text-align: center;" class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/66.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/66.png"/>
                                 <p>Мандарин</p>
                             </div>
                             <div style="text-align: center;" class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/67.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/67.png"/>
                                 <p>Грейпфрут</p>
                             </div>
                             <div style="text-align: center;" class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/MLS/68.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/MLS/68.png"/>
                                 <p>Свити</p>
                             </div>
                         </div>
@@ -1145,7 +1167,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hrt_2_166384888403.png" title="Драже HRT"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hrt_2_166384888403.png" title="Драже HRT"/>
                 <p class="accumulit-sa-item-dscrp">Для поддержания оптимальной работы сосудистой системы создан уникальный продукт, который взял от природы самое ценное и эффективное. HRT способствует укреплению сердечной мышцы</p>
                 <ul class="advantage-list">
                     <li>
@@ -1177,27 +1199,27 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HRT/8.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HRT/8.png"/>
                                 <p>Виноград</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HRT/30.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HRT/30.png"/>
                                 <p>Гранат</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HRT/54.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HRT/54.png"/>
                                 <p>Земляника</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HRT/57.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HRT/57.png"/>
                                 <p>Малина</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HRT/69.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HRT/69.png"/>
                                 <p>Омела белая</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HRT/80.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HRT/80.png"/>
                                 <p>Боярышник</p>
                             </div>
                         </div>
@@ -1206,7 +1228,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/ice_2_1663848889337.png" title="Драже ICE" height="95"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/ice_2_1663848889337.png" title="Драже ICE" height="95"/>
                 <p class="accumulit-sa-item-dscrp">Для здорового пищеварения Компания создала витаминно-минеральный комплекс ICE. Он оказывает «замораживающее» действие на деликатные проблемы, устраняет неприятные ощущения в желудке.</p>
                 <ul class="advantage-list">
                     <li>
@@ -1238,27 +1260,27 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ICE/5.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ICE/5.png"/>
                                 <p>Солодка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ICE/28.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ICE/28.png"/>
                                 <p>Алоэ вера</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ICE/47.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ICE/47.png"/>
                                 <p>Ромашка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ICE/70.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ICE/70.png"/>
                                 <p>Лабазник</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ICE/71.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ICE/71.png"/>
                                 <p>Облепиха</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/ICE/72.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/ICE/72.png"/>
                                 <p>Морковь</p>
                             </div>
                         </div>
@@ -1267,7 +1289,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hpr_2_16638489100372.png" title="Драже HPR"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hpr_2_16638489100372.png" title="Драже HPR"/>
                 <p class="accumulit-sa-item-dscrp">Злоупотребление жирной пищей, алкоголем заставляют трудиться печень на износ. HPR в сочетании со здоровым питанием и физической активностью помогут сохранить долголетие вашей печени.</p>
                 <ul class="advantage-list">
                     <li>
@@ -1300,31 +1322,31 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPR/52.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPR/52.png"/>
                                 <p>Куркума</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPR/61.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPR/61.png"/>
                                 <p>Артишок</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPR/62.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPR/62.png"/>
                                 <p>Одуванчик</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPR/73.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPR/73.png"/>
                                 <p>Расторопша</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPR/74.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPR/74.png"/>
                                 <p>Персик</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPR/75.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPR/75.png"/>
                                 <p>Изюм</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPR/76.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPR/76.png"/>
                                 <p>Авокадо</p>
                             </div>
                         </div>
@@ -1333,7 +1355,7 @@ function aboutAccSa() {
             </article>
             <div class="text-wrapper"><h2 class="presentation-acc-sa">ТОП ELITE</h2></div>
             <article class="accumulit-sa-item">
-                <div><img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/air_16367285044582.png" title="Драже AIR" style="height: 106px"/>
+                <div><img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/air_16367285044582.png" title="Драже AIR" style="height: 106px"/>
                 <p class="accumulit-sa-item-dscrp">17-й продукт серии Acumullit SA® поможет вдохнуть полной грудью, укрепить общий иммунитет и защититься от вирусов и бактерий. В драже собрана сила пяти континентов, ведь подбирая состав мы ни в чем не ограничивали себя, а нашли самые сильные и безопасные компоненты со всего земного шара, которые помогут вам стать увереннее в защите своего организма в такое небезопасное время</p></div>
                 <ul class="advantage-list">
                     <li>
@@ -1366,47 +1388,47 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/10.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/10.png"/>
                                 <p>Смородина черная</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/12.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/12.png"/>
                                 <p>Мака перуанская</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/13.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/13.png"/>
                                 <p>Африканское белое алоэ</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/14.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/14.png"/>
                                 <p>Шиповник коричневый</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/15.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/15.png"/>
                                 <p>Ягоды годжи</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/16.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/16.png"/>
                                 <p>Амла индийская</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/17.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/17.png"/>
                                 <p>Клюква</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/18.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/18.png"/>
                                 <p>Лимон</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/20.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/20.png"/>
                                 <p>Витамин С</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/21.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/21.png"/>
                                 <p>Витамин D</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/AIR/22.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/AIR/22.png"/>
                                 <p>Цитрат цинка</p>
                             </div>
                         </div>
@@ -1415,7 +1437,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/7-1_1695735144769.png" title="Драже PFT"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/7-1_1695735144769.png" title="Драже PFT"/>
                 <p class="accumulit-sa-item-dscrp">Это поистине один из самых ожидаемых продуктов линейки Acumullit SA® в Компании APL® GO. PFT приводит аппетит в норму, что помогает мягко и естественно снизить вес.</p>
                 <ul class="advantage-list">
                     <li>
@@ -1445,55 +1467,55 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/4.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/4.png"/>
                                 <p>Имбирь</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/28.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/28.png"/>
                                 <p>Алоэ вера</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/38.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/38.png"/>
                                 <p>Гарциния</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/52.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/52.png"/>
                                 <p>Куркума</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/55.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/55.png"/>
                                 <p>Перец стручковый</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/82.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/82.png"/>
                                 <p>Пиколинат хрома</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/83.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/83.png"/>
                                 <p>Витамины групы B</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/84.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/84.png"/>
                                 <p>Бурые водоросли</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/87.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/87.png"/>
                                 <p>Подорожник</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/88.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/88.png"/>
                                 <p>Семена льна</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/89.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/89.png"/>
                                 <p>Семена ячменя</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/90.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/90.png"/>
                                 <p>Экстракт помидоров</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/PFT/91.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/PFT/91.png"/>
                                 <p>Экстракт свеклы</p>
                             </div>
                         </div>
@@ -1502,7 +1524,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hpy-2_16716266193232.png" title="Драже HPY"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hpy-2_16716266193232.png" title="Драже HPY"/>
                 <p class="accumulit-sa-item-dscrp">Жить здесь и сейчас, отказаться от «режима автопилота» поможет драже HPY. Абсолютно уникальное сочетание эффективных натуральных компонентов поможет пробудиться после затяжной спячки, сконцентрироваться и жить осознанно!</p>
                 <ul class="advantage-list">
                     <li>
@@ -1541,51 +1563,51 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/4.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/4.png"/>
                                 <p>Имбирь</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/5.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/5.png"/>
                                 <p>Солодка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/23.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/23.png"/>
                                 <p>Гинкго билоба</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/47.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/47.png"/>
                                 <p>Ромашка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/48.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/48.png"/>
                                 <p>Пассифлора</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/49.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/49.png"/>
                                 <p>Банан</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/51.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/51.png"/>
                                 <p>Гарпагофитум</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/52.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/52.png"/>
                                 <p>Куркума</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/53.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/53.png"/>
                                 <p>Груша</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/71.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/71.png"/>
                                 <p>Облепиха</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/77.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/77.png"/>
                                 <p>Семена конопли</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/HPY/79.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/HPY/79.png"/>
                                 <p>Витания</p>
                             </div>
                         </div>
@@ -1594,7 +1616,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/brn_2_16638487226333.png" title="Драже BRN"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/brn_2_16638487226333.png" title="Драже BRN"/>
                 <p class="accumulit-sa-item-dscrp">BRN – ваша поддержка в борьбе с первыми признаками умственной усталости, угасания памяти. Драже помогут сохранить ясность ума, увеличить IQ и эффективность использования ресурсов мозга. </p>
                 <ul class="advantage-list">
                     <li>
@@ -1627,59 +1649,59 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/1.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/1.png"/>
                                 <p>Зеленый чай</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/4.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/4.png"/>
                                 <p>Имбирь</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/23.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/23.png"/>
                                 <p>Гинкго билоба</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/29.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/29.png"/>
                                 <p>Черника</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/32.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/32.png"/>
                                 <p>Элеутерококк</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/33.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/33.png"/>
                                 <p>Лимонник</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/34.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/34.png"/>
                                 <p>Бакопа монье</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/37.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/37.png"/>
                                 <p>Яблоко</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/42.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/42.png"/>
                                 <p>Женьшень</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/43.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/43.png"/>
                                 <p>Тернера</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/45.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/45.png"/>
                                 <p>Спаржа</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/52.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/52.png"/>
                                 <p>Куркума</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/78.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/78.png"/>
                                 <p>Кофе</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BRN/79.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BRN/79.png"/>
                                 <p>Витания</p>
                             </div>
                         </div>
@@ -1688,7 +1710,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img class="accumulit-sa-item-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/bty_2_16638488159407.png" title="Драже BTY"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/bty_2_16638488159407.png" title="Драже BTY"/>
                 <p class="accumulit-sa-item-dscrp">Драже BTY — это натуральная нутрикосметика, которая поможет вам выглядеть увереннее и моложе, быть активнее, меньше уставать, получая сбалансированные элементы для ежедневного рациона.</p>
                 <ul class="advantage-list">
                     <li>
@@ -1721,83 +1743,83 @@ function aboutAccSa() {
                     <div class="acc-sa-composition">
                         <div class="ingredient-items">
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/1.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/1.png"/>
                                 <p>Зеленый чай</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/5.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/5.png"/>
                                 <p>Солодка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/8.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/8.png"/>
                                 <p>Виноград</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/11.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/11.png"/>
                                 <p>Рябина красная</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/18.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/18.png"/>
                                 <p>Лимон</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/28.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/28.png"/>
                                 <p>Алоэ вера</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/30.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/30.png"/>
                                 <p>Гранат</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/32.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/32.png"/>
                                 <p>Элеутерококк</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/33.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/33.png"/>
                                 <p>Лимонник</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/34.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/34.png"/>
                                 <p>Бакопа монье</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/37.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/37.png"/>
                                 <p>Яблоко</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/47.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/47.png"/>
                                 <p>Ромашка</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/52.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/52.png"/>
                                 <p>Куркума</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/61.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/61.png"/>
                                 <p>Артишок</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/62.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/62.png"/>
                                 <p>Одуванчик</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/70.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/70.png"/>
                                 <p>Лабазник</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/73.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/73.png"/>
                                 <p>Расторопша</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/76.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/76.png"/>
                                 <p>Авокадо</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/79.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/79.png"/>
                                 <p>Витания</p>
                             </div>
                             <div class="ingredient-item">
-                                <img src="../media/main-page/images/main-page/acc-sa-components/BTY/81.png"/>
+                                <img src="media/main-page/images/main-page/acc-sa-components/BTY/81.png"/>
                                 <p>Клубник</p>
                             </div>
                         </div>
@@ -1919,7 +1941,7 @@ function aboutBeauty() {
   </div>
   <h2 class="heading-of-level-2">Какие есть средства в Beauty Natural Series?<h2>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/krem-dlya-lica_1681745301981.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/krem-dlya-lica_1681745301981.png"/></div>
     <div class="beauty-item-img-name">Крем для лица</div>
     <div class="beauty-item-dscr"><p>Крем мягко воздействует, успокаивает, увлажняет, питает, разглаживает, делает контур лица более четким. При регулярном применении дает отличный антивозрастной эффект, воздействуя на три фактора старения кожи, связанные с генетикой, воздействием окружающей среды и образом жизни.</p></div>
     <div class="beauty-item-list-name">Преимущества:</div>
@@ -1949,7 +1971,7 @@ function aboutBeauty() {
     </div>
   </article>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/krem-dlya-vek_16817452399446.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/krem-dlya-vek_16817452399446.png"/></div>
     <div class="beauty-item-img-name">Крем для век</div>
     <div class="beauty-item-dscr"><p>Крем разработан с учетом чувствительной кожи вокруг глаз, который подходит всем типам кожи. Он бережно восстанавливает упругость, придает коже вокруг глаз сияние и долговременно борется с признаками старения.</p></div>
     <div class="beauty-item-list-name">Преимущества:</div>
@@ -1979,7 +2001,7 @@ function aboutBeauty() {
     </div>
   </article>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/penka_16802539681.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/penka_16802539681.png"/></div>
     <div class="beauty-item-img-name">Пенка для умывания</div>
     <div class="beauty-item-dscr"><p>Мягкая очищающая пена идеально удаляет весь классический макияж, глубоко проникает в поры, расслабляет кожу и обеспечивает оптимальную основу для последующего ухода.</p></div>
     <div class="beauty-item-list-name">Преимущества:</div>
@@ -2004,7 +2026,7 @@ function aboutBeauty() {
     </div>
   </article>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/molochko-dlya-lica_16802539899073.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/molochko-dlya-lica_16802539899073.png"/></div>
     <div class="beauty-item-img-name">Молочко для лица</div>
     <div class="beauty-item-dscr"><p>Молочко бережно удаляет макияж, наполняет кожу комфортом. Нежная очищающая кремовая эмульсия приятной консистенции не содержит агрессивных ингредиентов и уже на этапе очищения питает и увлажняет кожу.</p></div>
     <div class="beauty-item-list-name">Преимущества:</div>
@@ -2027,7 +2049,7 @@ function aboutBeauty() {
     </div>
   </article>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/tonik-dlya-lica_16802540336829.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/tonik-dlya-lica_16802540336829.png"/></div>
     <div class="beauty-item-img-name">Тоник для лица</div>
     <div class="beauty-item-dscr"><p>Роскошный тоник для лица с нейтрализующим и успокаивающим действием придает вашему цвету лица сияющий и свежий вид. Лосьон удаляет остатки молочка, жесткой воды, извести. Кожа чувствует себя особенно свежей.</p></div>
     <div class="beauty-item-list-name">Преимущества:</div>
@@ -2053,7 +2075,7 @@ function aboutBeauty() {
     </div>
   </article>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/shelkovaya-maska_16817453454547.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/shelkovaya-maska_16817453454547.png"/></div>
     <div class="beauty-item-img-name">Шелковая маска для лица</div>
     <div class="beauty-item-dscr"><p>Незабываемая гладкость и свежесть лица после применения маски очаровывает. Этот этап защищает кожу от окислительного стресса, обеспечивает ее биологическое равновесие, оказывает заметный антивозрастной эффект. </p></div>
     <div class="beauty-item-list-name">Преимущества:</div>
@@ -2076,7 +2098,7 @@ function aboutBeauty() {
     </div>
   </article>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/dekol-te-krem_16817452702758.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/dekol-te-krem_16817452702758.png"/></div>
     <div class="beauty-item-img-name">Крем для зоны декольте</div>
     <div class="beauty-item-dscr"><p>Свежая и чувственная текстура крема тает на коже и быстро впитывается, оставляя после себя ощущение гладкости и упругости зоны декольте. </p></div>
     <div class="beauty-item-list-name">Преимущества:</div>
@@ -2109,7 +2131,7 @@ function aboutBeauty() {
     </div>
   </article>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/molochko_16802541661589.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/molochko_16802541661589.png"/></div>
     <div class="beauty-item-img-name">Молочко для тела</div>
     <div class="beauty-item-dscr"><p>Молочко быстро впитывается в кожные покровы, не забивая поры и не оставляя на теле жирную пленку. Восстанавливает упругость кожи тела, делает кожу шелковистой, защищает от клеточного старения и увядания.</p></div>
     <div class="beauty-item-list-name">Преимущества:</div>
@@ -2150,7 +2172,7 @@ function aboutBeauty() {
     </div>
   </article>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/2-v-1-eliksir-bol-shoy_16802542256417.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/2-v-1-eliksir-bol-shoy_16802542256417.png"/></div>
     <div class="beauty-item-img-name">2 в 1 спрей-эликсир для лица</div>
     <div class="beauty-item-dscr"><p>Освежающий спрей для лица богат высокоэффективными компонентами и питательными веществами. Он способен заметно изменить внешний вид кожи, увлажнить её, придать сияние и усилить выработку коллагена.</p></div>
     <div class="beauty-item-list-name">Преимущества:</div>
@@ -2180,7 +2202,7 @@ function aboutBeauty() {
     </div>
   </article>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/222222_____2-v-1-eliksir-malen-kiy-1_16802684931644.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/222222_____2-v-1-eliksir-malen-kiy-1_16802684931644.png"/></div>
     <div class="beauty-item-img-name">2 в 1 спрей-эликсир для лица (30 мл)</div>
     <div class="beauty-item-dscr"><p>Travel-формат освежающего спрея для лица богат высокоэффективными компонентами и питательными веществами. Он способен заметно изменить внешний вид кожи, увлажнить её, придать сияние и усилить выработку коллагена. </p></div>
     <div class="beauty-item-list-name">Преимущества:</div>
@@ -2212,7 +2234,7 @@ function aboutBeauty() {
     </div>
   </article>
   <article class="beauty-item">
-    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/222222______serum-eleksir-1_16802684420221.png"/></div>
+    <div class="beauty-item-img"><img src="media/main-page/images/main-page/main-page-categories/beauty/beauty-products/222222______serum-eleksir-1_16802684420221.png"/></div>
     <div class="beauty-item-img-name">Магический сывороточный эликсир</div>
     <div class="beauty-item-dscr"><p>Магический сывороточный эликсир BEAUTY® – это гибрид сыворотки и эмульсии для быстрых и интенсивных процедур ухода. Он эффективен, как сыворотка, легкий, как эмульсия, комфортный, как крем. Связывает влагу во всех слоях кожи, восстанавливает межклеточный цемент. <br/> <br/> Сыворотка «выталкивает морщины» и создает внутренний каркас кожи, обеспечивает мощный антивозрастной эффект, укрепляя внеклеточный матрикс и воздействуя на все структуры кожи. </p></div>
     <div class="beauty-item-list-name">Преимущества:</div>

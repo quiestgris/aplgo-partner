@@ -2,12 +2,13 @@ document.querySelectorAll('a').forEach(function (el) {
     el.setAttribute('target', '_blank');
 })
 checkWindowWidth();
-document.querySelector('.nav-btn.contacts').addEventListener('click', () => {
-    document.querySelector('.dropdown-contact').classList.add('show')
-    document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "#144616";
-    document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "#FFFFFF";
-})
-
+if (window.innerWidth <= 574) {
+    document.querySelector('.nav-btn.contacts').addEventListener('click', () => {
+        document.querySelector('.dropdown-contact').classList.add('show')
+        document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "#144616";
+        document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "#FFFFFF";
+    })
+}
 let removingContactsByclickingOnAnotherPlace = function (event) {
     if (window.innerWidth <= 574) return undefined;
     if (!(event.target.matches('.nav-btn.contacts button') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact img') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact span')))
@@ -75,6 +76,9 @@ function handleBurgerScroll() {
 }
 
 function disableScroll() {
+    const burgerMenu = document.querySelector('.burger-menu');
+
+
     window.addEventListener('wheel', preventScroll, { passive: false });
     window.addEventListener('touchmove', preventScroll, { passive: false });
     window.addEventListener('scroll', preventScroll, { passive: false });
@@ -89,6 +93,8 @@ function disableScroll() {
 }
 
 function enableScroll() {
+    const burgerMenu = document.querySelector('.burger-menu');
+
     window.removeEventListener('wheel', preventScroll, { passive: false });
     window.removeEventListener('touchmove', preventScroll, { passive: false });
     window.removeEventListener('scroll', preventScroll, { passive: false });
@@ -107,6 +113,8 @@ function highlightsBurgerBtns () {
 }
 
 function disableScrollOfBurgerMenu() {
+    const burgerMenu = document.querySelector('.burger-menu');
+
     if (burgerMenu.style.display = "block") {
         if ((burgerMenu.clientHeight + burgerMenu.scrollTop) >= burgerMenu.scrollHeight) {
             console.log("here we go")
@@ -169,6 +177,8 @@ function clickBurgerMenu() {
     document.clickedBurgerMenu = !document.clickedBurgerMenu;
     const background = document.querySelector('.burger-menu-background');
     const menu = document.querySelector('.burger-menu');
+    const burgerMenu = document.querySelector('.burger-menu');
+
     window.onclick = function () { };
 
     if (document.clickedBurgerMenu) {
@@ -225,9 +235,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function checkWindowWidth() {
     if (window.innerWidth <= 574) {
         window.overflowY = "hidden"
+        const voidProp = document.getElementById('void-prop')
+        const mainHeader = document.querySelector(".main-header")
+        let removingContactsByclickingOnAnotherPlace = function (event) {
+    if (window.innerWidth <= 574) return undefined;
+    if (!(event.target.matches('.nav-btn.contacts button') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact img') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact span')))
+    {
+        document.querySelector('.dropdown-contact').classList.remove('show')
+        document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "";
+        document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "";
+    }
+        }
+        window.removeEventListener("click", removingContactsByclickingOnAnotherPlace);
+
         let newHeader = document.createElement("div")
         newHeader.classList.add("img-logo-container")
-        removingContactsByclickingOnAnotherPlace = null;
         window.removeEventListener('scroll', headerTransformation)
         voidProp.replaceWith(newHeader)
         newHeader.innerHTML = `<img class="logo" src="../media/main-page/images/main-page/slogan5.png">`;
