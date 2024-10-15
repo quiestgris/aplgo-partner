@@ -8,7 +8,8 @@ document.querySelector('.nav-btn.contacts').addEventListener('click', () => {
     document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "#FFFFFF";
 })
 
-window.onclick = function (event) {
+let removingContactsByclickingOnAnotherPlace = function (event) {
+    if (window.innerWidth <= 574) return undefined;
     if (!(event.target.matches('.nav-btn.contacts button') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact img') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact span')))
     {
         document.querySelector('.dropdown-contact').classList.remove('show')
@@ -16,6 +17,8 @@ window.onclick = function (event) {
         document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "";
     }
 }
+
+window.addEventListener("click", removingContactsByclickingOnAnotherPlace);
 
 
 const currentUrl = window.location.href;
@@ -25,6 +28,8 @@ const contactHeader = document.querySelector('.contact-header')
 const voidProp = document.getElementById('void-prop')
 const html = document.querySelector('html')
 
+
+const burgerMenu = document.querySelector('.burger-menu');
 const footerImg = document.querySelector('.footer-img')
 const footer = document.querySelector('footer')
 const body = document.querySelector('body')
@@ -46,26 +51,73 @@ function headerTransformation() {
         mainHeader.style.boxShadow = '0 0 8px 0 black'
     }
 }
-function disableTouchScroll(e){
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
+
+function preventScroll(e) {
+    
+    e.preventDefault();
+    
+}
+function stopPropagationForBurgerMenu(e) { 
+    e.stopPropagation();
+}
+
+function handleBurgerScroll() {
+    const scrollTop = burgerMenu.scrollTop;
+    const scrollHeight = burgerMenu.scrollHeight;
+    const clientHeight = burgerMenu.clientHeight;
+
+    if (burgerMenu.scrollTop == 0) {
+        burgerMenu.scrollTo(0, 1);
+    }
+    if ((clientHeight + scrollTop) >= scrollHeight) {
+        burgerMenu.scrollTo(0, scrollTop - 0.1);
+    }   
 }
 
 function disableScroll() {
-    let windowY = window.scrollY;
-    document.querySelectorAll("html, body").forEach(function (e) { e.style.overflow = "hidden";})
-    scrollTo(0, windowY);
+    window.addEventListener('wheel', preventScroll, { passive: false });
+    window.addEventListener('touchmove', preventScroll, { passive: false });
+    window.addEventListener('scroll', preventScroll, { passive: false });
     
+    burgerMenu.addEventListener('wheel', stopPropagationForBurgerMenu, {passive: false});
+    burgerMenu.addEventListener('touchmove', stopPropagationForBurgerMenu, { passive: false });
+    burgerMenu.addEventListener('scroll', stopPropagationForBurgerMenu, { passive: false });
+
+    burgerMenu.addEventListener('wheel', handleBurgerScroll, {passive: false});
+    burgerMenu.addEventListener('touchmove', handleBurgerScroll, { passive: false });
+    burgerMenu.addEventListener('scroll', handleBurgerScroll, { passive: false });
 }
 
 function enableScroll() {
-    document.querySelectorAll("html, body").forEach(function (e) { e.style.overflow = ""})
+    window.removeEventListener('wheel', preventScroll, { passive: false });
+    window.removeEventListener('touchmove', preventScroll, { passive: false });
+    window.removeEventListener('scroll', preventScroll, { passive: false });
+    
+    burgerMenu.removeEventListener('wheel', stopPropagationForBurgerMenu);
+    burgerMenu.removeEventListener('touchmove', stopPropagationForBurgerMenu);
+    burgerMenu.removeEventListener('scroll', stopPropagationForBurgerMenu);
+
+    burgerMenu.addEventListener('wheel', handleBurgerScroll, {passive: false});
+    burgerMenu.addEventListener('touchmove', handleBurgerScroll, { passive: false });
+    burgerMenu.addEventListener('scroll', handleBurgerScroll, { passive: false });
+
 }
 function highlightsBurgerBtns () {
     document.q
 }
-function removeAllBurgerDropBtns() {
+
+function disableScrollOfBurgerMenu() {
+    if (burgerMenu.style.display = "block") {
+        if ((burgerMenu.clientHeight + burgerMenu.scrollTop) >= burgerMenu.scrollHeight) {
+            console.log("here we go")
+            burgerMenu.addEventListener('wheel', preventScroll, { passive: false });
+            burgerMenu.addEventListener('touchmove', preventScroll, { passive: false });
+            burgerMenu.addEventListener('scroll', preventScroll, { passive: false });
+        }
+    }
+}
+
+function removeAllBurgerDropBtns() { 
     let burgerDropBtns = document.querySelectorAll('.main-header-burger-btn.btn-about-products ~ .burger-dropdown-btn');
     burgerDropBtns.forEach(function (e) {
         e.style.display = "none";
@@ -73,15 +125,23 @@ function removeAllBurgerDropBtns() {
     burgerDropBtns = document.querySelectorAll('.main-header-burger-btn.contacts ~ .burger-dropdown-btn');
     burgerDropBtns.forEach(function (e) {
         e.style.display = "none";
-    }) 
+    })
+    disableScrollOfBurgerMenu();
 }
 function showBurgerDropBtnsOfAboutProducts() {
     removeAllBurgerDropBtns();
+    
     let showBurgerDropBtnsOfAboutProductsVar = true;
     let burgerDropBtns = document.querySelectorAll('.main-header-burger-btn.btn-about-products ~ .burger-dropdown-btn');
     burgerDropBtns.forEach(function (e) {
         e.style.display = "block";
     })
+    if ((burgerMenu.clientHeight + burgerMenu.scrollTop) < burgerMenu.scrollHeight) {
+            console.log("here we go")
+            burgerMenu.removeEventListener('wheel', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('touchmove', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('scroll', preventScroll, { passive: false });
+        }
 }
 function showBurgerDropBtnsOfContacts() {
     removeAllBurgerDropBtns();
@@ -96,26 +156,42 @@ function showBurgerDropBtnsOfContacts() {
         left: 0,
         behavior: "smooth",
     });
+    if ((burgerMenu.clientHeight + burgerMenu.scrollTop) < burgerMenu.scrollHeight) {
+            console.log("here we go again")
+            burgerMenu.removeEventListener('wheel', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('touchmove', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('scroll', preventScroll, { passive: false });
+        }
 }
+
 
 function clickBurgerMenu() {
     document.clickedBurgerMenu = !document.clickedBurgerMenu;
     const background = document.querySelector('.burger-menu-background');
     const menu = document.querySelector('.burger-menu');
+    window.onclick = function () { };
 
     if (document.clickedBurgerMenu) {
         disableScroll();
+        disableScrollOfBurgerMenu();
         background.style.display = 'block';
         menu.style.display = 'block';
         requestAnimationFrame(() => {
             background.classList.add('show');
             menu.classList.add('show');
         });
-        document.querySelector('.burger').classList.toggle('transform-burger');
+        burgerMenu.scrollTo(0, 0);
+        // document.querySelector('.burger').classList.toggle('transform-burger');
     } else {
+        if ((burgerMenu.clientHeight + burgerMenu.scrollTop) < burgerMenu.scrollHeight) {
+            burgerMenu.removeEventListener('wheel', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('touchmove', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('scroll', preventScroll, { passive: false });
+        }
+        menu.style.position = "";
         enableScroll();
-        background.style.display = '';
-        menu.style.display = '';
+        background.style.display = "none";
+        menu.style.display = "none";
         background.classList.remove('show');
         menu.classList.remove('show');
         removeAllBurgerDropBtns();
@@ -138,22 +214,27 @@ document.querySelector('#about-products.nav-btn').addEventListener('mouseout', f
 
 window.addEventListener('scroll', headerTransformation);
 
-
 voidProp.style.height = mainHeader.offsetHeight + 'px';
 // voidProp.style.width = mainHeader.offsetWidth + 'px';
 voidProp.style.marginBottom = 28 + 'px'
-if (window.innerWidth <= 926)
-    voidProp.style.marginBottom = 28 + 'px'
-if (window.innerWidth <= 753) {
-    voidProp.style.marginBottom = '20px'
-}
-if (window.innerWidth <= 713) {
-    voidProp.style.marginBottom = '12px'
-}
-if (window.innerWidth <= 574) {
-    window.removeEventListener('scroll', headerTransformation)
-    voidProp.outerHTML = `<div class="img-logo-container"><img class="logo" src="media/main-page/images/main-page/slogan5.png"></div>`;
-    mainHeader.innerHTML = `
+function checkWindowWidth() {
+    if (window.innerWidth <= 926)
+        voidProp.style.marginBottom = 28 + 'px'
+    if (window.innerWidth <= 753) {
+        voidProp.style.marginBottom = '20px'
+    }
+    if (window.innerWidth <= 713) {
+        voidProp.style.marginBottom = '12px'
+    }
+    if (window.innerWidth <= 574) {
+        window.overflowY = "hidden"
+        let newHeader = document.createElement("div")
+        newHeader.classList.add("img-logo-container")
+        removingContactsByclickingOnAnotherPlace = null;
+        window.removeEventListener('scroll', headerTransformation)
+        voidProp.replaceWith(newHeader)
+        newHeader.innerHTML = `<img class="logo" src="media/main-page/images/main-page/slogan5.png">`;
+        mainHeader.innerHTML = `
        <button class="mobile-menu" onclick="clickBurgerMenu();">Меню</button> 
     <!--<div class="burger" onclick="clickBurgerMenu()">
         
@@ -164,11 +245,23 @@ if (window.innerWidth <= 574) {
         </div> 
         </div> -->
     `;
-    document.querySelector('.burger-menu-background').addEventListener('click', clickBurgerMenu)
-    document.querySelector('.burger').addEventListener('click', function () {document.querySelector('.burger').classList.toggle('transform-burger')})
+        document.querySelector('.burger-menu-background').addEventListener('click', clickBurgerMenu)
+    
+        document.querySelectorAll('.usage-button').forEach((el) => el.addEventListener('touchstart', (event) => {
+        event.target.nextElementSibling.classList.toggle('show')
+        }))
+//         if (window.innerWidth >= 568 && window.innerWidth <= 574) {
+//     document.querySelector('.burger-menu').style.left = '4%';
+// }
+// else {
+//     document.querySelector('.burger-menu').style.left = '47%';
+// }
+        // document.querySelector('.burger').addEventListener('click', function () { document.querySelector('.burger').classList.toggle('transform-burger') })
+    }
 }
 
-
+window.addEventListener("resize", function () { if(window.innerWidth <= 574) checkWindowWidth(); })
+window.addEventListener("resize", function () { if (window.innerWidth <= 574) disableScrollOfBurgerMenu(); })
 
 const contentInner = content.innerHTML;
 
@@ -200,7 +293,7 @@ function mainPage() {
                 </div>
             </div>
             <div class="text-wrapper" style=" margin-top: 20px;"><h1>Восстановление организма</h1></div>
-            <div class="img-wrapper"><img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/product_categories_acc_sa.png" width="550"/></div>
+            <div class="img-wrapper"><img class="accsa-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/product_categories_acc_sa.png"/></div>
             <div class="text-wrapper"><h2>Драже Accumulit SA</h2></div>
             <div class="text-wrapper"><p>На вкус — как любимые леденцы из детства…, но «драже» APL, обладая мощным оздоровительным эффектом, несут колоссальную пользу и энергию, т.к. в них сконцентрирована вся сила природы. Их «рецептура» дает нашим клеткам жизненно-важный строительный материал, включающий в организме режим коррекции, наполняет его резервами для полного восстановления.</p>
             </div>
@@ -255,14 +348,13 @@ function mainPage() {
                     <a href="https://ru.aplgo.com/j/772654/acumullitsa/"><button><div class="text-wrapper">Перейти в магазин</div></button></a>
                     <a><button><div class="text-wrapper" onclick="aboutBeauty()">Подробнее о Beauty</div></button></a>
                 </div>
-                <div class="youtube-video-wrapper about-acc-sa">
-                <div class="youtube-video-container">
-                    <iframe class="youtube-video" src="https://www.youtube.com/embed/yF937f1GLvE?si=xcPaYRGdmEAqVfRu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <div class="youtube-video-wrapper about-acc-sa"><div class="youtube-video-container">
+                        <iframe class="youtube-video" src="https://www.youtube.com/embed/yF937f1GLvE?si=xcPaYRGdmEAqVfRu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>    
+                    </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             <div class="americano">
-                <img class="cofee-img" src="media/main-page/images/main-page/main-page-categories/cofee/goods_2.png" width="550"/>
+                <img class="cofee-img" src="media/main-page/images/main-page/main-page-categories/cofee/goods_2.png"/>
                 <div class="text-wrapper"><h2>Натуральный кофе Американо</h2></div>
                 <div class="text-wrapper"><p>Наш кофе изготовлен по современной технологии сублимации Freezе dried <br/>«сушка замораживанием», благодаря чему он сохранил все натуральные вещества, обладает тонким изысканным вкусом и ароматом.</p></div>
                 <div class="text-wrapper"><p>Преимущества нашего кофе:</p></div>
@@ -291,7 +383,6 @@ function mainPage() {
             <div class="shop-about-btns" style="margin-top: 12px;">
                     <a href="https://backoffice.aplgo.com/register/?sp=772654"><button><div class="text-wrapper">СТАТЬ ПАРТНЕРОМ</div></button></a>
                 </div>
-        </div>
     `;
     footer.style.position = 'static'
     window.scrollTo(0,0)
@@ -306,12 +397,12 @@ function aboutAccSa() {
     content.innerHTML = `
     <div class="youtube-video-wrapper about-accsa">
     <div class="youtube-video-container">
-        <iframe class="youtube-video" width="560" height="315" src="https://www.youtube.com/embed/5yLsG0ddWYs?si=rDMxQ6Gn1QF9Ql_7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe class="youtube-video" width="560" src="https://www.youtube.com/embed/5yLsG0ddWYs?si=rDMxQ6Gn1QF9Ql_7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
     </div>    
     <div class="text-wrapper"><h2 class="presentation-acc-sa">ТОП НА КАЖДЫЙ ДЕНЬ</h2></div>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/grw_16638488253805.png" title="Драже GRW"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/grw_16638488253805.png" title="Драже GRW"/>
                 <p class="accumulit-sa-item-dscrp">GRW – это витаминно-минеральный комплекс из 320 различных антиоксидантов. Драже помогают укреплять иммунитет, способствуют быстрому восстановлению сил и ускорению выздоровления.</p>
                 <ul class="advantage-list">
                     <li>
@@ -336,7 +427,7 @@ function aboutAccSa() {
                         способствует усилению антиоксидантных и адаптогенных свойств организма.
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав GRW</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав GRW</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -400,7 +491,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/gts-2_16638488415048.png" title="Драже GTS"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/gts-2_16638488415048.png" title="Драже GTS"/>
                 <p class="accumulit-sa-item-dscrp">GTS представляет собой эффективную смесь витаминов, минералов и растительных компонентов, которая наполняет организм мощной жизненной энергией и готовит к новым подвигам!</p>
                 <ul class="advantage-list">
                     <li>
@@ -425,7 +516,7 @@ function aboutAccSa() {
                         высвобождает дополнительную собственную энергию организма для увеличения работоспособности и активности.
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300;">Состав GTS</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав GTS</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -469,7 +560,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/nrm-2_16638488945595.png" title="Драже NRM"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/nrm-2_16638488945595.png" title="Драже NRM"/>
                 <p class="accumulit-sa-item-dscrp">Аккумулированные драже NRM – верный помощник тех, кто ведет борьбу с сахарным диабетом. В нем содержатся экстракты многих ценных целебных растений и плодов из разных уголков планеты!</p>
                 <ul class="advantage-list">
                     <li>
@@ -494,7 +585,7 @@ function aboutAccSa() {
                         нормализует метаболизм, предотвращает действие адреналина, который стимулирует печень на высокую выработку глюкозы
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300;">Состав NRM</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав NRM</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -534,7 +625,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/pwr-m-2_16638488567117.png" title="Драже PWRman"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/pwr-m-2_16638488567117.png" title="Драже PWRman"/>
                 <p class="accumulit-sa-item-dscrp">Сексуальное здоровье – важная составляющая жизни мужчины. APL® GO предлагает продукт для мужского здоровья, который отлаживает все процессы в мужском организме, придает силу и бодрость.</p>
                 <ul class="advantage-list">
                     <li>
@@ -559,7 +650,7 @@ function aboutAccSa() {
                         помогает росту гормона тестостерона
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300;">Состав PWRman</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав PWRman</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     <div class="ingredient-items">
@@ -597,7 +688,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/pwr-2_16638489850011.png" title="Драже PWR"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/pwr-2_16638489850011.png" title="Драже PWRwoman"/>
                 <p class="accumulit-sa-item-dscrp">Часто пары страдают от расстройств интимной сферы. Компания APL® GO предлагает парный продукт. PWR woman стабилизирует женский организм и нормализует энергетический баланс.</p>
                 <ul class="advantage-list">
                     <li>
@@ -622,7 +713,7 @@ function aboutAccSa() {
                         помогает организму женщины справиться с признаками преждевременного старения
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300;">Состав PWR</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав PWRwoman</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -658,7 +749,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/rlx-2_16638489958592.png"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/rlx-2_16638489958592.png"/>
                 <p class="accumulit-sa-item-dscrp">Драже RLX – это уникальный комплекс экстрактов растений, который помогает справиться с любыми проявлениями стресса, защищая организм от нервного напряжения и перегрузок.</p>
                 <ul class="advantage-list">
                     <li>
@@ -683,7 +774,7 @@ function aboutAccSa() {
                         обладает мягким седативным действием, помогая справиться с повышенной раздражительностью
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300;">Состав RLX</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав RLX</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -723,7 +814,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/sld-2_16638490133829.png"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/sld-2_16638490133829.png"/>
                 <p class="accumulit-sa-item-dscrp">SLD – это комплекс из эффективных компонентов, сочетание которых идеально подходит для правильной и слаженной работы суставов. Вам не придется отказываться от любимых пеших прогулок.</p>
                 <ul class="advantage-list">
                     <li>
@@ -748,7 +839,7 @@ function aboutAccSa() {
                         помогает ускорять процесс срастания костей и суставов после травм, переломов и хирургических вмешательств
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300;">Состав SLD</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав SLD</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -788,7 +879,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/stp-2_16638490824081.png"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/stp-2_16638490824081.png"/>
                 <p class="accumulit-sa-item-dscrp">Компания APL® GO уверена: с болью можно справиться безопасным способом. Драже STP за счет своего противовоспалительного действия избавляет от причины болевых ощущений.</p>
                 <ul class="advantage-list">
                     <li>
@@ -813,7 +904,7 @@ function aboutAccSa() {
                         восстанавливает отток крови в венозное русло и активизирует капиллярное кровоснабжение
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300;">Состав STP</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав STP</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -857,7 +948,7 @@ function aboutAccSa() {
             </article>
             <div class="text-wrapper"><h2 class="presentation-acc-sa">ТОП ПРЕМИУМ</h2></div>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/alt-2_16638487365215.png" title="Драже ALT"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/alt-2_16638487365215.png" title="Драже ALT"/>
                 <p class="accumulit-sa-item-dscrp">Аллергические заболевания плохо поддаются лечению традиционными способами. Драже ALT – это смесь наиболее эффективных натуральных ингредиентов, действующих сообща против аллергии.</p>
                 <ul class="advantage-list">
                     <li>
@@ -882,7 +973,7 @@ function aboutAccSa() {
                         способствует подавлению аллергических реакций в помещениях и на открытом воздухе.
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав ALT</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав ALT</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -938,7 +1029,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/mls_16469082891528 (1).png" title="Драже MLS"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/mls_16469082891528 (1).png" title="Драже MLS"/>
                 <p class="accumulit-sa-item-dscrp">По данным ВОЗ, до 80% заболеваний человека напрямую вызываются паразитами! APL® GO предлагает противопаразитарный комплекс MLS для избавления от паразитов раз и навсегда!</p>
                 <ul class="advantage-list">
                     <li>
@@ -963,7 +1054,7 @@ function aboutAccSa() {
                         не препятствует размножению полезных бактерий, нужных для эффективной работы внутренних органов человека.
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав MLS</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав MLS</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -1055,7 +1146,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hrt_2_166384888403.png" title="Драже HRT"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hrt_2_166384888403.png" title="Драже HRT"/>
                 <p class="accumulit-sa-item-dscrp">Для поддержания оптимальной работы сосудистой системы создан уникальный продукт, который взял от природы самое ценное и эффективное. HRT способствует укреплению сердечной мышцы</p>
                 <ul class="advantage-list">
                     <li>
@@ -1080,7 +1171,7 @@ function aboutAccSa() {
                         усиливает сокращения сердечной мышцы и уменьшает ее возбудимость
                     </li>
                 </ul>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав HRT</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав HRT</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -1116,7 +1207,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/ice_2_1663848889337.png" title="Драже ICE" height="95"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/ice_2_1663848889337.png" title="Драже ICE" height="95"/>
                 <p class="accumulit-sa-item-dscrp">Для здорового пищеварения Компания создала витаминно-минеральный комплекс ICE. Он оказывает «замораживающее» действие на деликатные проблемы, устраняет неприятные ощущения в желудке.</p>
                 <ul class="advantage-list">
                     <li>
@@ -1141,7 +1232,7 @@ function aboutAccSa() {
                         успокаивает раздражение ЖКТ, избавляет от тошноты
                     </li>
                 </ul>
-                <br/><p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав ICE</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав ICE</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -1177,7 +1268,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hpr_2_16638489100372.png" title="Драже HPR"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hpr_2_16638489100372.png" title="Драже HPR"/>
                 <p class="accumulit-sa-item-dscrp">Злоупотребление жирной пищей, алкоголем заставляют трудиться печень на износ. HPR в сочетании со здоровым питанием и физической активностью помогут сохранить долголетие вашей печени.</p>
                 <ul class="advantage-list">
                     <li>
@@ -1203,7 +1294,7 @@ function aboutAccSa() {
                     </li>
                 </ul>
                 <br/>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав HPR</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав HPR</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -1243,7 +1334,7 @@ function aboutAccSa() {
             </article>
             <div class="text-wrapper"><h2 class="presentation-acc-sa">ТОП ELITE</h2></div>
             <article class="accumulit-sa-item">
-                <div><img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/air_16367285044582.png" title="Драже AIR" style="height: 106px"/>
+                <div><img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/air_16367285044582.png" title="Драже AIR" style="height: 106px"/>
                 <p class="accumulit-sa-item-dscrp">17-й продукт серии Acumullit SA® поможет вдохнуть полной грудью, укрепить общий иммунитет и защититься от вирусов и бактерий. В драже собрана сила пяти континентов, ведь подбирая состав мы ни в чем не ограничивали себя, а нашли самые сильные и безопасные компоненты со всего земного шара, которые помогут вам стать увереннее в защите своего организма в такое небезопасное время</p></div>
                 <ul class="advantage-list">
                     <li>
@@ -1269,7 +1360,7 @@ function aboutAccSa() {
                     </li>
                 </ul>
                 <br/>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав AIR</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав AIR</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -1325,7 +1416,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/7-1_1695735144769.png" title="Драже PFT"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/7-1_1695735144769.png" title="Драже PFT"/>
                 <p class="accumulit-sa-item-dscrp">Это поистине один из самых ожидаемых продуктов линейки Acumullit SA® в Компании APL® GO. PFT приводит аппетит в норму, что помогает мягко и естественно снизить вес.</p>
                 <ul class="advantage-list">
                     <li>
@@ -1348,7 +1439,7 @@ function aboutAccSa() {
                     </li>
                 </ul>
                 <br/>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав PFT</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав PFT</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -1412,7 +1503,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hpy-2_16716266193232.png" title="Драже HPY"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/hpy-2_16716266193232.png" title="Драже HPY"/>
                 <p class="accumulit-sa-item-dscrp">Жить здесь и сейчас, отказаться от «режима автопилота» поможет драже HPY. Абсолютно уникальное сочетание эффективных натуральных компонентов поможет пробудиться после затяжной спячки, сконцентрироваться и жить осознанно!</p>
                 <ul class="advantage-list">
                     <li>
@@ -1444,7 +1535,7 @@ function aboutAccSa() {
                     </li>
                 </ul>
                 <br/>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав HPY</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав HPY</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -1504,7 +1595,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/brn_2_16638487226333.png" title="Драже BRN"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/brn_2_16638487226333.png" title="Драже BRN"/>
                 <p class="accumulit-sa-item-dscrp">BRN – ваша поддержка в борьбе с первыми признаками умственной усталости, угасания памяти. Драже помогут сохранить ясность ума, увеличить IQ и эффективность использования ресурсов мозга. </p>
                 <ul class="advantage-list">
                     <li>
@@ -1530,7 +1621,7 @@ function aboutAccSa() {
                     </li>
                 </ul>
                 <br/>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав BRN</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав BRN</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -1598,7 +1689,7 @@ function aboutAccSa() {
                 <hr/>
             </article>
             <article class="accumulit-sa-item">
-                <img src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/bty_2_16638488159407.png" title="Драже BTY"/>
+                <img class="accumulit-sa-item-img" src="media/main-page/images/main-page/main-page-categories/accumulit-sa/accumulit-sa-product-imgs/bty_2_16638488159407.png" title="Драже BTY"/>
                 <p class="accumulit-sa-item-dscrp">Драже BTY — это натуральная нутрикосметика, которая поможет вам выглядеть увереннее и моложе, быть активнее, меньше уставать, получая сбалансированные элементы для ежедневного рациона.</p>
                 <ul class="advantage-list">
                     <li>
@@ -1624,7 +1715,7 @@ function aboutAccSa() {
                     </li>
                 </ul>
                 <br/>
-                <p id="acc-sa-details" style="color: #24FF00; text-decoration: underline; font-weight: 300; ">Состав BTY</p>
+                <div class="acc-sa-details"><p id="acc-sa-details">Состав BTY</p></div>
                 <div class="acc-sa-composition-wrapper">
                     <div class="acc-sa-composition">
                     </div>
@@ -1716,7 +1807,7 @@ function aboutAccSa() {
             </article>
             <div class="youtube-video-wrapper">
             <div class="youtube-video-container">
-                <iframe class="youtube-video about-acc-sa" width="560" height="315" src="https://www.youtube.com/embed/spF-j6_2YQc?si=xTvclllqoo5m7DIe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe class="youtube-video about-acc-sa" width="560" src="https://www.youtube.com/embed/spF-j6_2YQc?si=xTvclllqoo5m7DIe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             </div>    
             <div class="shop-about-btns">
@@ -1727,21 +1818,21 @@ function aboutAccSa() {
                     <a href="https://backoffice.aplgo.com/register/?sp=772654"><button><div class="text-wrapper">СТАТЬ ПАРТНЕРОМ</div></button></a>
                 </div>
             `;
-    document.querySelector('.dropdown').style.display = 'none';
+    if (window.innerWidth > 574) document.querySelector('.dropdown').style.display = 'none';
     // window.history.pushState({ id: '2'},"Page 2",'/aboutaccsa')
     footer.style.position = 'static'
     window.scrollTo(0, 0);
-    let accSaDetails = document.querySelectorAll('#acc-sa-details')
-    accSaDetails.forEach(function (el) {
-    el.addEventListener('click', function (event) {
-        event.target.nextElementSibling.classList.toggle('show')
-        // if (element.classList.contains("show"))
-        //     if (window.scrollY != window.scrollY + element.offsetHeight + 20 )
-        //         window.scrollTo(0, window.scrollY + element.offsetHeight + 20);
+    // let accSaDetails = document.querySelectorAll('#acc-sa-details')
+    // accSaDetails.forEach(function (el) {
+    // el.addEventListener('click', function (event) {
+    //     event.target.nextElementSibling.classList.toggle('show')
+    //     // if (element.classList.contains("show"))
+    //     //     if (window.scrollY != window.scrollY + element.offsetHeight + 20 )
+    //     //         window.scrollTo(0, window.scrollY + element.offsetHeight + 20);
     
 
-    })
-    })
+    // })
+    // })
     
 }
 
@@ -1753,7 +1844,7 @@ function aboutCofee() {
     content.innerHTML = `
     <div class="youtube-video-wrapper">
     <div class="youtube-video-container">
-        <iframe class="youtube-video about-cofee"width="560" height="315" src="https://www.youtube.com/embed/35nfPid0q94?si=TmSsiE7RAByd2t3j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe class="youtube-video about-cofee"width="560" src="https://www.youtube.com/embed/35nfPid0q94?si=TmSsiE7RAByd2t3j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </div>
         <div class="shop-about-btns about-cofee">
@@ -1774,7 +1865,7 @@ function aboutCompany() {
     content.innerHTML = `
     <div class="youtube-video-wrapper about-company">
     <div class="youtube-video-container">
-        <iframe class="youtube-video about-company" width="560" height="315" src="https://www.youtube.com/embed/NG2b-Vm9dxI?si=iJtxSZmG-YEgA7l5&amp;end=52" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe class="youtube-video about-company" width="560" src="https://www.youtube.com/embed/NG2b-Vm9dxI?si=iJtxSZmG-YEgA7l5&amp;end=52" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
         </div>
         `;
@@ -1792,7 +1883,7 @@ function travelling() {
     content.innerHTML = `
     <div class="youtube-video-wrapper travelling">
     <div class="youtube-video-container">
-        <iframe class="youtube-video" width="560" height="315" src="https://www.youtube.com/embed/-u_e2atX6UU?si=sS8JNHYRBAqgSOY4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe class="youtube-video" width="560" src="https://www.youtube.com/embed/-u_e2atX6UU?si=sS8JNHYRBAqgSOY4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
     </div>
         <div class="text-wrapper" style="margin-top: 40px;"><p>Хотите отправиться вместе с нами в круиз?<br/>Ставайте нашим партнером и покоряйте новые страны!</p></div>
@@ -2153,14 +2244,15 @@ function aboutBeauty() {
 
     `;
     window.history.replaceState('', '', currentUrl + 'beauty')
-    document.querySelector('.dropdown').style.display = 'none';
-    window.scrollTo(0,0)
+    if (window.innerWidth > 574) document.querySelector('.dropdown').style.display = 'none';
+    window.scrollTo(0, 0)
     document.querySelectorAll('.usage-button').forEach((el) => el.addEventListener('click', (event) => {
         event.target.nextElementSibling.classList.toggle('show')
     }))
     
     footer.style.position = 'static'
 }
+
 
 if (document.referrer == (currentUrl + "accumulitsa/")) aboutAccSa();
 if (document.referrer == (currentUrl + "beauty/")) aboutBeauty();

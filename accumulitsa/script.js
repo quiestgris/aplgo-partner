@@ -1,84 +1,395 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="APLGO, Восстановление Организма">
-    <style>
-        @font-face {
-    font-family: 'Intern';
-    src: url(../Inter-VariableFont_slnt_wght.ttf);
+document.querySelectorAll('a').forEach(function (el) {
+    el.setAttribute('target', '_blank');
+})
+
+document.querySelector('.nav-btn.contacts').addEventListener('click', () => {
+    document.querySelector('.dropdown-contact').classList.add('show')
+    document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "#144616";
+    document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "#FFFFFF";
+})
+
+let removingContactsByclickingOnAnotherPlace = function (event) {
+    if (window.innerWidth <= 574) return undefined;
+    if (!(event.target.matches('.nav-btn.contacts button') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact img') || event.target.matches('.nav-btn.contacts .dropdown-contact .nav-btn.contact span')))
+    {
+        document.querySelector('.dropdown-contact').classList.remove('show')
+        document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "";
+        document.querySelector('.nav-btn.contacts button.dropbtn').style.color = "";
+    }
 }
-    </style>
+
+window.addEventListener("click", removingContactsByclickingOnAnotherPlace);
+
+
+const currentUrl = window.location.href.replace("accumulitsa/","");
+
+const mainHeader = document.querySelector(".main-header")
+const contactHeader = document.querySelector('.contact-header')
+const voidProp = document.getElementById('void-prop')
+const html = document.querySelector('html')
+
+
+const burgerMenu = document.querySelector('.burger-menu');
+const footerImg = document.querySelector('.footer-img')
+const footer = document.querySelector('footer')
+const body = document.querySelector('body')
+const content = document.querySelector('.content')
+const initialWidth = window.width 
+let accSaDetails = document.querySelectorAll('#acc-sa-details');
+var documentHeight = Math.max( body.scrollHeight, body.offsetHeight, 
+    html.clientHeight, html.scrollHeight, html.offsetHeight);
+const dropdownAboutProducts = document.querySelector('.dropdown');
+document.clickedBurgerMenu = false;
+
+function headerTransformation() {
+    if (window.scrollY == 0) {
+        mainHeader.style.backgroundColor = ''
+        mainHeader.style.boxShadow = ''
+    }
+    else {
+        mainHeader.style.backgroundColor = "#3e8e41";
+        mainHeader.style.boxShadow = '0 0 8px 0 black'
+    }
+}
+
+function preventScroll(e) {
     
-    <link rel="preload" href="../Inter-VariableFont_slnt_wght.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="canonical" href=""/> <!-- Site page with identical text for search engine indexation  -->
-    <link rel="alternate" hreflang="xx-YY" href="URL" /> <!-- Indicate site version on another language to search engine. xx - language code acording to ISO 639-1, YY - Region code according to ISO 3166-1 Alpha 2-->
-    <link rel="stylesheet" href="../bootstrap.min.css"/>
-    <link rel="stylesheet" href="styles.css"/>
-    <title>APLGO | Восстановление Организма</title>
-    <meta name="description" content="Продукция APLGO-разработанная итальянскими ученными, это  нано-технология Acumullit SA — эксклюзивная разработка в сфере клеточного питания и омоложения  организма. Она на клеточном уровне распознает и «чинит» поврежденные клетки организма до полного восстановления. Применяется -  для всех возрастов, противопоказаний не имеет. Продукт можно купить более чем 85 странах мира."/>
-    <link rel="icon" href="media/main-page/images/main-page/ordinary-slogan.png">
-    <link rel="">
-</head>
-<body tabindex="0">
-    <div class="burger-menu-background"></div>
-    <div class="burger-menu">
-        <nav class="main-header-burger">
-            <div class="main-header-burger-wrapper">
-                <div class="main-header-burger-nav-btn"><button class="main-header-burger-btn" onclick="clickBurgerMenu();mainPage();">Главная</button></div>
-                <div class="main-header-burger-nav-btn">
-                    <button class="main-header-burger-btn btn-about-products" onclick="showBurgerDropBtnsOfAboutProducts();">О продукции</button>
-                    <button class="burger-dropdown-btn" onclick="clickBurgerMenu(); aboutAccSa();">Про Драже Acumulit SA</button>
-                    <button class="burger-dropdown-btn" onclick="clickBurgerMenu();aboutBeauty();">Про Косметику Beauty</button>
-                    <button class="burger-dropdown-btn" onclick="clickBurgerMenu();aboutCofee();">Про кофе Americano</button>
-                </div>
-                <div class="main-header-burger-nav-btn"><button class="main-header-burger-btn" onclick="clickBurgerMenu();aboutCompany();">О компании</button></div>
-                <div class="main-header-burger-nav-btn"><button class="main-header-burger-btn" onclick="clickBurgerMenu();travelling();">Путешествия</button></div>
-                <div class="main-header-burger-nav-btn">
-                    <button class="main-header-burger-btn contacts" onclick="showBurgerDropBtnsOfContacts();">Контакты</button>
-                    <div class="burger-dropdown-btn"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/call-icon.png" style="vertical-align: midldle;" /><span class="contact-header-text">+380505578571</span></div>
-                    <div class="burger-dropdown-btn"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/email.png" style="vertical-align: midldle;" /><span class="contact-header-text mail">ola777ola7777@gmail.com</span></div>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <div class="wrapper">
-        <!-- <div class="contact-header">
-            <div class="contact-header-phone-number">
-                <img src="../../media/main-page/images/main-page/contacts/phone.svg" width="18" style="vertical-align: middle"/>
-                <span class="contact-header-text">+38050557851 - Telegram, Viber</span></div>
-            <div class="contact-header-email"><img src="../../media/main-page/images/main-page/contacts/email.svg" width="22" style="display: inline-block; vertical-align: middle;"/><span class="contact-header-text">olgabaeva@gmail.com</span></div>
+    e.preventDefault();
+    
+}
+function stopPropagationForBurgerMenu(e) { 
+    e.stopPropagation();
+}
+
+function handleBurgerScroll() {
+    const scrollTop = burgerMenu.scrollTop;
+    const scrollHeight = burgerMenu.scrollHeight;
+    const clientHeight = burgerMenu.clientHeight;
+
+    if (burgerMenu.scrollTop == 0) {
+        burgerMenu.scrollTo(0, 1);
+    }
+    if ((clientHeight + scrollTop) >= scrollHeight) {
+        burgerMenu.scrollTo(0, scrollTop - 0.1);
+    }   
+}
+
+function disableScroll() {
+    window.addEventListener('wheel', preventScroll, { passive: false });
+    window.addEventListener('touchmove', preventScroll, { passive: false });
+    window.addEventListener('scroll', preventScroll, { passive: false });
+    
+    burgerMenu.addEventListener('wheel', stopPropagationForBurgerMenu, {passive: false});
+    burgerMenu.addEventListener('touchmove', stopPropagationForBurgerMenu, { passive: false });
+    burgerMenu.addEventListener('scroll', stopPropagationForBurgerMenu, { passive: false });
+
+    burgerMenu.addEventListener('wheel', handleBurgerScroll, {passive: false});
+    burgerMenu.addEventListener('touchmove', handleBurgerScroll, { passive: false });
+    burgerMenu.addEventListener('scroll', handleBurgerScroll, { passive: false });
+}
+
+function enableScroll() {
+    window.removeEventListener('wheel', preventScroll, { passive: false });
+    window.removeEventListener('touchmove', preventScroll, { passive: false });
+    window.removeEventListener('scroll', preventScroll, { passive: false });
+    
+    burgerMenu.removeEventListener('wheel', stopPropagationForBurgerMenu);
+    burgerMenu.removeEventListener('touchmove', stopPropagationForBurgerMenu);
+    burgerMenu.removeEventListener('scroll', stopPropagationForBurgerMenu);
+
+    burgerMenu.addEventListener('wheel', handleBurgerScroll, {passive: false});
+    burgerMenu.addEventListener('touchmove', handleBurgerScroll, { passive: false });
+    burgerMenu.addEventListener('scroll', handleBurgerScroll, { passive: false });
+
+}
+function highlightsBurgerBtns () {
+    document.q
+}
+
+function disableScrollOfBurgerMenu() {
+    if (burgerMenu.style.display = "block") {
+        if ((burgerMenu.clientHeight + burgerMenu.scrollTop) >= burgerMenu.scrollHeight) {
+            console.log("here we go")
+            burgerMenu.addEventListener('wheel', preventScroll, { passive: false });
+            burgerMenu.addEventListener('touchmove', preventScroll, { passive: false });
+            burgerMenu.addEventListener('scroll', preventScroll, { passive: false });
+        }
+    }
+}
+
+function removeAllBurgerDropBtns() { 
+    let burgerDropBtns = document.querySelectorAll('.main-header-burger-btn.btn-about-products ~ .burger-dropdown-btn');
+    burgerDropBtns.forEach(function (e) {
+        e.style.display = "none";
+    })
+    burgerDropBtns = document.querySelectorAll('.main-header-burger-btn.contacts ~ .burger-dropdown-btn');
+    burgerDropBtns.forEach(function (e) {
+        e.style.display = "none";
+    })
+    disableScrollOfBurgerMenu();
+}
+function showBurgerDropBtnsOfAboutProducts() {
+    removeAllBurgerDropBtns();
+    
+    let showBurgerDropBtnsOfAboutProductsVar = true;
+    let burgerDropBtns = document.querySelectorAll('.main-header-burger-btn.btn-about-products ~ .burger-dropdown-btn');
+    burgerDropBtns.forEach(function (e) {
+        e.style.display = "block";
+    })
+    if ((burgerMenu.clientHeight + burgerMenu.scrollTop) < burgerMenu.scrollHeight) {
+            console.log("here we go")
+            burgerMenu.removeEventListener('wheel', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('touchmove', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('scroll', preventScroll, { passive: false });
+        }
+}
+function showBurgerDropBtnsOfContacts() {
+    removeAllBurgerDropBtns();
+    let burgerDropBtns = document.querySelectorAll('.main-header-burger-btn.contacts ~ .burger-dropdown-btn');
+    burgerDropBtns.forEach(function (e) {
+        e.style.display = "block";
+    })
+    let burgerMenu = document.querySelector(".burger-menu");
+    let burgerDropdownBtnMail = document.querySelector(".burger-dropdown-btn .mail");
+    burgerMenu.scrollTo({
+        top: 2000,
+        left: 0,
+        behavior: "smooth",
+    });
+    if ((burgerMenu.clientHeight + burgerMenu.scrollTop) < burgerMenu.scrollHeight) {
+            console.log("here we go again")
+            burgerMenu.removeEventListener('wheel', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('touchmove', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('scroll', preventScroll, { passive: false });
+        }
+}
+
+
+function clickBurgerMenu() {
+    document.clickedBurgerMenu = !document.clickedBurgerMenu;
+    const background = document.querySelector('.burger-menu-background');
+    const menu = document.querySelector('.burger-menu');
+    window.onclick = function () { };
+
+    if (document.clickedBurgerMenu) {
+        disableScroll();
+        disableScrollOfBurgerMenu();
+        background.style.display = 'block';
+        menu.style.display = 'block';
+        requestAnimationFrame(() => {
+            background.classList.add('show');
+            menu.classList.add('show');
+        });
+        burgerMenu.scrollTo(0, 0);
+        // document.querySelector('.burger').classList.toggle('transform-burger');
+    } else {
+        if ((burgerMenu.clientHeight + burgerMenu.scrollTop) < burgerMenu.scrollHeight) {
+            burgerMenu.removeEventListener('wheel', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('touchmove', preventScroll, { passive: false });
+            burgerMenu.removeEventListener('scroll', preventScroll, { passive: false });
+        }
+        menu.style.position = "";
+        enableScroll();
+        background.style.display = "none";
+        menu.style.display = "none";
+        background.classList.remove('show');
+        menu.classList.remove('show');
+        removeAllBurgerDropBtns();
+    }
+}
+
+document.querySelector('#about-products.nav-btn').addEventListener('mouseover', function () {
+    document.querySelector('.dropdown').style.display = 'block';
+})
+
+document.querySelector('#about-products.nav-btn').addEventListener('mouseout', function () {
+    document.querySelector('.dropdown').style.display = '';
+})
+
+// document.querySelectorAll('.link-btn').forEach(function (el) {
+//     el.addEventListener('click', function () {
+//         document.querySelector('.dropdown').style.display = 'none';
+//     })
+// })
+
+window.addEventListener('scroll', headerTransformation);
+
+voidProp.style.height = mainHeader.offsetHeight + 'px';
+// voidProp.style.width = mainHeader.offsetWidth + 'px';
+voidProp.style.marginBottom = 28 + 'px'
+function checkWindowWidth() {
+    if (window.innerWidth <= 926)
+        voidProp.style.marginBottom = 28 + 'px'
+    if (window.innerWidth <= 753) {
+        voidProp.style.marginBottom = '20px'
+    }
+    if (window.innerWidth <= 713) {
+        voidProp.style.marginBottom = '12px'
+    }
+    if (window.innerWidth <= 574) {
+        window.overflowY = "hidden"
+        let newHeader = document.createElement("div")
+        newHeader.classList.add("img-logo-container")
+        removingContactsByclickingOnAnotherPlace = null;
+        window.removeEventListener('scroll', headerTransformation)
+        voidProp.replaceWith(newHeader)
+        newHeader.innerHTML = `<img class="logo" src="../media/main-page/images/main-page/slogan5.png">`;
+        mainHeader.innerHTML = `
+       <button class="mobile-menu" onclick="clickBurgerMenu();">Меню</button> 
+    <!--<div class="burger" onclick="clickBurgerMenu()">
+        
+     <div class="rules">
+            <div class="rule"></div>
+            <div class="rule"></div>
+            <div class="rule"></div>
+        </div> 
         </div> -->
-        <div id="void-prop"></div>
-        <nav class="main-header" id="main-header">
-            <img class="logo" src="../media/main-page/images/main-page/slogan5.png" width="215" height="77">
-            <div class="nav-btns">
-                <div class="nav-btn"><button class="dropbtn" onclick="mainPage()">Главная</button>
-                </div>
-                <div class="nav-btn" id="about-products">
-                    <button class="dropbtn">О продукции</button>
-                    <div class="dropdown" id="dropdown">
-                        <button class="link-btn" onclick="aboutAccSa();" style="margin: 0;">Про Драже Acumulit SA</button>
-                        <button class="link-btn" style="margin: 0;" onclick="aboutBeauty()">Про Косметику Beauty</button>
-                        <button class="link-btn" onclick="aboutCofee()" style="margin: 0;">Про кофе Americano</button>
+    `;
+        document.querySelector('.burger-menu-background').addEventListener('click', clickBurgerMenu)
+    
+        document.querySelectorAll('.usage-button').forEach((el) => el.addEventListener('touchstart', (event) => {
+        event.target.nextElementSibling.classList.toggle('show')
+        }))
+        // document.querySelector('.burger').addEventListener('click', function () { document.querySelector('.burger').classList.toggle('transform-burger') })
+    }
+}
+
+window.addEventListener("resize", function () { if(window.innerWidth <= 574) checkWindowWidth(); })
+window.addEventListener("resize", function () { if (window.innerWidth <= 574) disableScrollOfBurgerMenu(); })
+
+const contentInner = content.innerHTML;
+
+function mainPage() {
+    if (document.onPage == 1)
+        return undefined;
+    document.onPage = 1; 
+    content.innerHTML = `
+        <div id="ImageCarouselCSS" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#ImageCarouselCSS" id="circle" data-slide-to="0" class="active">
+                    </li>
+                    <li data-target="#ImageCarouselCSS" id="circle" data-slide-to="1">
+                    </li>
+                    <li data-target="#ImageCarouselCSS" id="circle" data-slide-to="2">
+                    </li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="../media/main-page/images/main-page/carousel/photo_2024-05-14_21-57-22.jpg" class="d-block w-350" width="740px" height="540px">
                     </div>
+                    <div class="carousel-item">
+                    <img src="../media/main-page/images/main-page/BEAUTY/finallyChangedBEAUTY.jpg" class="d-block w-350" width="740px" height="540px">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="../media/main-page/images/main-page/carousel/photo_2024-05-14_22-01-10.jpg" class="d-block w-350" width="740px" height="540">
+                    </div>
+                    
                 </div>
-                <div class="nav-btn">
-                    <button class="dropbtn" onclick="aboutCompany()">О компании</button></div>
-                <div class="nav-btn">
-                    <button class="dropbtn" onclick="travelling()">Путешествия</button></div>
             </div>
-            <div class="nav-btn contacts">
-                    <button class="dropbtn">Контакты</button>
-                    <div class="dropdown-contact" id="dropdown">
-                        <div class="nav-btn contact"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/call-icon.png" style="vertical-align: midldle;" /><span class="contact-header-text">+380505578571</span></div>
-                        <div class="nav-btn contact"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/email.png" style="vertical-align: midldle;" /><span class="contact-header-text">ola777ola7777@gmail.com</span></div>
+            <div class="text-wrapper" style=" margin-top: 20px;"><h1>Восстановление организма</h1></div>
+            <div class="img-wrapper"><img class="accsa-img" src="../media/main-page/images/main-page/main-page-categories/accumulit-sa/product_categories_acc_sa.png"/></div>
+            <div class="text-wrapper"><h2>Драже Accumulit SA</h2></div>
+            <div class="text-wrapper"><p>На вкус — как любимые леденцы из детства…, но «драже» APL, обладая мощным оздоровительным эффектом, несут колоссальную пользу и энергию, т.к. в них сконцентрирована вся сила природы. Их «рецептура» дает нашим клеткам жизненно-важный строительный материал, включающий в организме режим коррекции, наполняет его резервами для полного восстановления.</p>
+            </div>
+            <div class="shop-about-btns-wraper">
+            <div class="shop-about-btns">
+                <a href="https://ru.aplgo.com/j/772654/acumullitsa/"><button><div class="text-wrapper">Перейти в магазин</div></button></a>
+                <a><button><div class="text-wrapper" onclick="aboutAccSa()">Подробнее о драже</div></button></a>
+            </div>
+            </div>
+            <div class="beauty">
+                <div class="img-wrapper"><img class="beauty-img" src="../media/main-page/images/main-page/main-page-categories/beauty/Beauty.png" width="550"/></div>
+                <div class="text-wrapper"><h2>Косметика Beauty Natural Series</h2></div>
+                <div class="text-wrapper"><p>Совместно с мировыми экспертами в области медицинской косметологии мы разработали уникальный умный состав косметики, который объединяет в себе бережные химические формулы и все преимущества природных компонентов, а также инновации многолетних разработок в области косметики. Мы сумели так улучшить и усилить состав, что теперь косметика дает не только длительный, но и быстрый эффект</p></div>
+                <div class="beauty-advantages-wrapper">
+                    <div class="text-wrapper"><h2 class="beauty-advantages-heading">Коротко о косметике Beauty Natural Series</h2></div>
+                    <article class="beauty-advantages">
+                        <div class="beauty-advantages-item">
+                            <img src="../media/main-page/images/main-page/beauty-characteristics/paraben.svg"/>
+                            <p>0% парабенов</p>
+                        </div>
+                        <div class="beauty-advantages-item">
+                            <img src="../media/main-page/images/main-page/beauty-characteristics/phtalat.svg"/>
+                            <p>0% фталата</p>
+                        </div>
+                        <div class="beauty-advantages-item">
+                            <img src="../media/main-page/images/main-page/beauty-characteristics/vaselin.svg"/>
+                            <p>0% вазелина</p>
+                        </div>
+                        <div class="beauty-advantages-item">
+                            <img src="../media/main-page/images/main-page/beauty-characteristics/phormaldegid.svg"/>
+                            <p>0% формальдегида</p>
+                        </div>
+                        <div class="beauty-advantages-item last-line">
+                            <img src="../media/main-page/images/main-page/beauty-characteristics/oil.svg"/>
+                            <p>0% нефти и мазута</p>
+                        </div>
+                        <div class="beauty-advantages-item last-line">
+                            <img src="../media/main-page/images/main-page/beauty-characteristics/syntetic pillows.svg"/>
+                            <p>0% синтетических подушек</p>
+                        </div>
+                        <div class="beauty-advantages-item last-line">
+                            <img src="../media/main-page/images/main-page/beauty-characteristics/microplactic.svg"/>
+                            <p>0% микропластика</p>
+                        </div>
+                        <div class="beauty-advantages-item last-line">
+                            <img src="../media/main-page/images/main-page/beauty-characteristics/svgexport-21.svg"/>
+                            <p>Мы не тестируем нашу продукцию на животных</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="shop-about-btns">
+                    <a href="https://ru.aplgo.com/j/772654/acumullitsa/"><button><div class="text-wrapper">Перейти в магазин</div></button></a>
+                    <a><button><div class="text-wrapper" onclick="aboutBeauty()">Подробнее о Beauty</div></button></a>
+                </div>
+                <div class="youtube-video-wrapper about-acc-sa"><div class="youtube-video-container">
+                        <iframe class="youtube-video" src="https://www.youtube.com/embed/yF937f1GLvE?si=xcPaYRGdmEAqVfRu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>    
+                    </div>
                     </div>
                 </div>
-        </nav>
-        <div class="content">
-            <div class="youtube-video-wrapper about-accsa">
+            <div class="americano">
+                <img class="cofee-img" src="../media/main-page/images/main-page/main-page-categories/cofee/goods_2.png"/>
+                <div class="text-wrapper"><h2>Натуральный кофе Американо</h2></div>
+                <div class="text-wrapper"><p>Наш кофе изготовлен по современной технологии сублимации Freezе dried <br/>«сушка замораживанием», благодаря чему он сохранил все натуральные вещества, обладает тонким изысканным вкусом и ароматом.</p></div>
+                <div class="text-wrapper"><p>Преимущества нашего кофе:</p></div>
+                <div class="cofee-advantages-wrapper">
+                <ul class="cofee-advantages">
+                    <li>
+                        улучшает кровоснабжение мозга и стимулирует активную сенсорную память
+                    </li>
+                    <li>
+                        помогает справиться со стрессом, побороть апатию, вялость и сонливость
+                    </li>
+                    <li>
+                        действует как природный натуральный антидепрессант
+                    </li>
+                    <li>
+                        нейтрализует свободные радикалы благодаря мощным антиоксидантам, <br/>защищает здоровые клетки организма
+                    </li>
+                </ul>
+                </div>
+                <div class="shop-about-btns">
+                    <a href="https://ru.aplgo.com/j/772654/acumullitsa/"><button><div class="text-wrapper">Перейти в магазин</div></button></a>
+                    <a><button onclick="aboutCofee()"><div class="text-wrapper">Подробнее об Американо</div></button></a>
+                </div>
+            </div>
+            <div class="text-wrapper" style="margin-top: 40px;"><p>Хотите покупать продукт по ОПТОВОЙ ЦЕНЕ?</p></div>
+            <div class="shop-about-btns" style="margin-top: 12px;">
+                    <a href="https://backoffice.aplgo.com/register/?sp=772654"><button><div class="text-wrapper">СТАТЬ ПАРТНЕРОМ</div></button></a>
+                </div>
+    `;
+    footer.style.position = 'static'
+    window.scrollTo(0,0)
+    window.history.replaceState('',"",currentUrl)
+}
+
+function aboutAccSa() {
+    if (document.onPage == 2)
+        return undefined;
+    window.history.replaceState('', '', currentUrl + 'accumulitsa')
+    document.onPage = 2;
+    content.innerHTML = `
+    <div class="youtube-video-wrapper about-accsa">
     <div class="youtube-video-container">
         <iframe class="youtube-video" width="560" src="https://www.youtube.com/embed/5yLsG0ddWYs?si=rDMxQ6Gn1QF9Ql_7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
@@ -1500,15 +1811,445 @@
             <div class="shop-about-btns" style="margin-top: 12px;">
                     <a href="https://backoffice.aplgo.com/register/?sp=772654"><button><div class="text-wrapper">СТАТЬ ПАРТНЕРОМ</div></button></a>
                 </div>
-            </div>
-        <footer>
-            <p style="text-align: center;">© 2011 - 2024. Сайт партнёра APLGO. Не являеться официальным сайтом компании APLGO. <br/>ТОВ «АПЛГО УКР» 65007, Одеська обл., м. Одеса, вул. Новощіпний ряд, буд. 15/17</p>
-        </footer>
+            `;
+    if (window.innerWidth > 574) document.querySelector('.dropdown').style.display = 'none';
+    // window.history.pushState({ id: '2'},"Page 2",'/aboutaccsa')
+    footer.style.position = 'static'
+    window.scrollTo(0, 0);
+    // let accSaDetails = document.querySelectorAll('#acc-sa-details')
+    // accSaDetails.forEach(function (el) {
+    // el.addEventListener('click', function (event) {
+    //     event.target.nextElementSibling.classList.toggle('show')
+    //     // if (element.classList.contains("show"))
+    //     //     if (window.scrollY != window.scrollY + element.offsetHeight + 20 )
+    //     //         window.scrollTo(0, window.scrollY + element.offsetHeight + 20);
+    
+
+    // })
+    // })
+    
+}
+
+function aboutCofee() {
+    if (document.onPage == 3)
+        return undefined;
+    window.history.replaceState('', '', currentUrl + 'americano-cofee')
+    document.onPage = 3;
+    content.innerHTML = `
+    <div class="youtube-video-wrapper">
+    <div class="youtube-video-container">
+        <iframe class="youtube-video about-cofee"width="560" src="https://www.youtube.com/embed/35nfPid0q94?si=TmSsiE7RAByd2t3j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
     </div>
-    <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
-    <script src="../worker.js"></script>
-</body>
-</html>
+        <div class="shop-about-btns about-cofee">
+                    <a href="https://ru.aplgo.com/j/772654/acumullitsa/"><button><div class="text-wrapper">Перейти в магазин</div></button></a>
+        </div>
+    `;
+    window.scrollTo(0, 0);
+    document.querySelector('.dropdown').style.display = 'none';
+    // footer.style.position = 'absolute';
+    // footer.style.top = body.offsetHeight - 150 + 'px'
+}
+
+function aboutCompany() {
+    if (document.onPage == 4)
+        return undefined;
+    window.history.replaceState('', '', currentUrl + 'company')
+    document.onPage = 4;
+    content.innerHTML = `
+    <div class="youtube-video-wrapper about-company">
+    <div class="youtube-video-container">
+        <iframe class="youtube-video about-company" width="560" src="https://www.youtube.com/embed/NG2b-Vm9dxI?si=iJtxSZmG-YEgA7l5&amp;end=52" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+        </div>
+        `;
+    window.scrollTo(0, 0);
+    // footer.style.position = 'absolute';
+    // footer.style.top = body.offsetHeight - 150 + 'px'
+}
+
+
+function travelling() {
+    if (document.onPage == 5)
+        return undefined;
+    document.onPage = 5;
+    window.history.replaceState('', '', currentUrl + 'travels')
+    content.innerHTML = `
+    <div class="youtube-video-wrapper travelling">
+    <div class="youtube-video-container">
+        <iframe class="youtube-video" width="560" src="https://www.youtube.com/embed/-u_e2atX6UU?si=sS8JNHYRBAqgSOY4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    </div>
+        <div class="text-wrapper" style="margin-top: 40px;"><p>Хотите отправиться вместе с нами в круиз?<br/>Ставайте нашим партнером и покоряйте новые страны!</p></div>
+            <div class="shop-about-btns" style="margin-top: 12px;">
+                    <a href="https://backoffice.aplgo.com/register/?sp=772654"><button><div class="text-wrapper">СТАТЬ ПАРТНЕРОМ</div></button></a>
+                </div>
+    <div class="youtube-video-wrapper travelling">
+    <div class="youtube-video-container">
+        <iframe class="youtube-video" width="560" height="315" src="https://www.youtube.com/embed/1QsRbA_hacI?si=mTFt1fjDS1GAgwp0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    </div>
+    <div class="youtube-video-wrapper travelling">
+    <div class="youtube-video-container">
+        <iframe class="youtube-video" width="560" height="315" src="https://www.youtube.com/embed/ap6R2YnsjMI?si=gKpX5n-6Nt2hRVZp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+    </div>
+        `;
+    window.scrollTo(0,0)
+    footer.style.position = 'static'
+}
+
+function aboutBeauty() {
+    if (document.onPage == 6)
+        return undefined;
+    document.onPage = 6;
+    content.innerHTML = `
+        <div class="beauty-technologies">
+    <h1>3 эксклюзивные технологии нашей косметики</h1>
+    <p class="beauty-technology"><span>EARLY BOOST®</span> – уникальный источник растительного таурина, полученный из экстракта водоросли Jania Rubéns. Его косметические свойства просто невероятны! Он заряжает клетки кожи энергией, сохраняет заряд молодости, задерживает проявление первых признаков старения. Энергия — это и есть молодость. Поэтому она есть в составе BEAUTY®</p>
+    <hr/>
+    <p class="beauty-technology"><span>SYN®-AKE*</span> – это активный ингредиент, борющийся с морщинами, его свойства сходны со змеиным ядом. Но это не должно вас пугать. Индустрия красоты использует этот новый чудодейственный продукт для расслабления мышц лица и противодействия образованию морщин. Около 60 мышц лица заботятся о нашей мимике, и они работают на полной скорости каждый день. С 25 лет их работа начинает предательски отпечатываться на нашем лице. SYN®-AKE* предназначен для мгновенного и продолжительного расслабления мышц лица и сведения морщин к минимуму.</p>
+    <hr/>
+    <p class="beauty-technology"><span>Gatuline® Expression</span> – это своеобразный «природный ботокс», который мгновенно улучшает контур глаз и лица, борется с мимическими, гравитационными и возрастными морщинами. Gatuline® Expression сертифицирован как натуральный COSMOS/ECOCERT, NPA и NSF.</p>
+  </div>
+  <h2 class="heading-of-level-2">Какие есть средства в Beauty Natural Series?<h2>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/krem-dlya-lica_1681745301981.png"/></div>
+    <div class="beauty-item-img-name">Крем для лица</div>
+    <div class="beauty-item-dscr"><p>Крем мягко воздействует, успокаивает, увлажняет, питает, разглаживает, делает контур лица более четким. При регулярном применении дает отличный антивозрастной эффект, воздействуя на три фактора старения кожи, связанные с генетикой, воздействием окружающей среды и образом жизни.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        сохраняет и увеличивает капитал молодости кожи, предлагает ей оптимальную долгосрочную защиту;
+      </li>
+      <li>
+        обеспечивает уплотнение кожи, восстановление и свежесть
+      </li>
+      <li>  
+        защищает от оксидативного стресса (загрязнения воздуха)
+      </li>
+      <li>
+        предотвращает появление первых морщин
+      </li>
+      <li>
+        помогает поддерживать тургор, водный и энергетический баланс всех слоев кожи лица
+      </li>
+      <li>
+        имеет anti-age-эффект с накопительным действием
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Крем следует наносить легкими движениями по массажным линиям утром и/или вечером на хорошо очищенные лицо и шею, дать впитаться. Через час обязательно промокнуть остатки крема сухой салфеткой.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/krem-dlya-vek_16817452399446.png"/></div>
+    <div class="beauty-item-img-name">Крем для век</div>
+    <div class="beauty-item-dscr"><p>Крем разработан с учетом чувствительной кожи вокруг глаз, который подходит всем типам кожи. Он бережно восстанавливает упругость, придает коже вокруг глаз сияние и долговременно борется с признаками старения.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        разглаживает и успокаивает кожу вокруг глаз
+      </li>
+      <li>
+        уменьшает «гусиные лапки» и другие мимические морщинки;
+      </li>
+      <li>  
+        обеспечивает видимый лифтинг-эффект, питание, увлажнение, anti-age-эффект с накопительным действием;
+      </li>
+      <li>
+        «стирает» круги и мешки под глазами, а также следы усталости;
+      </li>
+      <li>
+        эффективно борется с мелкими морщинками, обезвоживанием кожи и отеками под глазами;
+      </li>
+      <li>
+        противостоит иссушению кожи, дает ощущение комфорта и свежести.
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Рекомендуем наносить крем легкими похлопывающими движениями утром и/или вечером на хорошо очищенную кожу вокруг глаз. Двигайтесь по костному краю верхнего и нижнего века от переносицы к вискам. Вечером рекомендуется наносить крем для век не позднее, чем за час до сна, чтобы крем успел поработать, пока активны ваши мышцы</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/penka_16802539681.png"/></div>
+    <div class="beauty-item-img-name">Пенка для умывания</div>
+    <div class="beauty-item-dscr"><p>Мягкая очищающая пена идеально удаляет весь классический макияж, глубоко проникает в поры, расслабляет кожу и обеспечивает оптимальную основу для последующего ухода.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        имеет воздушную, приятную текстуру, превращает процесс очищения в сплошное удовольствие
+      </li>
+      <li>
+        эффективно удаляет макияж и готовит кожу к последующему уходу
+      </li>
+      <li>  
+        расслабляет кожу, борется с морщинками
+      </li>
+      <li>
+        идеально подходит для ежедневного применения
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Нанесите на ладонь небольшое количество нежной очищающей пены (размером с грецкий орех) и равномерно распределите ее по ладоням. Затем нанесите на очищаемые участки, аккуратно помассируйте лицо. Смойте пену теплой водой. 
+Рекомендуется для ежедневного очищения</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/molochko-dlya-lica_16802539899073.png"/></div>
+    <div class="beauty-item-img-name">Молочко для лица</div>
+    <div class="beauty-item-dscr"><p>Молочко бережно удаляет макияж, наполняет кожу комфортом. Нежная очищающая кремовая эмульсия приятной консистенции не содержит агрессивных ингредиентов и уже на этапе очищения питает и увлажняет кожу.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        роскошная легкая текстура молочка мягко очищает чувствительную кожу, снимает макияж, удаляет грязь и жир, накопившиеся за день
+      </li>
+      <li>
+        средство оказывает дополнительное увлажняющее и успокаивающее действие на кожу лица и шеи
+      </li>
+      <li>  
+       активные вещества дают коже необходимую основу для последующей программы ухода
+      <li>
+        при длительном использовании кожа выглядит свежей, молодой и здоровой
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Равномерно нанесите молочко кончиками пальцев на очищаемые участки кожи. Нежно вмассируйте и протрите остатки спонжем или мягкой косметической салфеткой. После очищения рекомендуем освежить кожу тоником для лица BEAUTY®.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/tonik-dlya-lica_16802540336829.png"/></div>
+    <div class="beauty-item-img-name">Тоник для лица</div>
+    <div class="beauty-item-dscr"><p>Роскошный тоник для лица с нейтрализующим и успокаивающим действием придает вашему цвету лица сияющий и свежий вид. Лосьон удаляет остатки молочка, жесткой воды, извести. Кожа чувствует себя особенно свежей.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        прекрасное завершение этапа очищения кожи
+      </li>
+      <li>
+        тоник имеет уникальную формулу и идеально подходит для чувствительной и сухой кожи (не содержит алкоголя)
+      </li>
+      <li>  
+       кожа выглядит свежей уже после первого применения
+      <li>
+        значение pH стабилизируется быстрее после мягкого очищения
+      </li>
+      <li>
+        тоник подходит для компрессов для глаз
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Наносите тоник ватным тампоном или кончиками пальцев на лицо и шею/декольте ежедневно после очищения. Этот этап увеличит эффективность всей серии косметики BEAUTY®</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/shelkovaya-maska_16817453454547.png"/></div>
+    <div class="beauty-item-img-name">Шелковая маска для лица</div>
+    <div class="beauty-item-dscr"><p>Незабываемая гладкость и свежесть лица после применения маски очаровывает. Этот этап защищает кожу от окислительного стресса, обеспечивает ее биологическое равновесие, оказывает заметный антивозрастной эффект. </p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        всего за 15 минут эта маска способна сделать кожу заметно моложе благодаря ее мгновенному эффекту лифтинга
+      </li>
+      <li>
+        высокоэффективные вещества, содержащиеся в основе маски, обеспечивают коже необходимое увлажнение, помогают повысить естественное содержание коллагена и возвращают коже прежнюю эластичность
+      </li>
+      <li>  
+        специальный комплекс бережно отшелушивает кожу, что гарантирует глубокое проникновение активных ингредиентов
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Наносите маску после тщательного очищения или после пилинга. Распределите средство равномерно, избегая области вокруг глаз. Наслаждайтесь её шелковым прикосновением 15 минут, затем смойте теплой водой или удалите маску мягкой косметической салфеткой.<br/>
+Для равномерного нанесения воспользуйтесь косметической кисточкой.
+После маски мы рекомендуем нанести крем BEAUTY® для достижения максимального омолаживающего эффекта.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/dekol-te-krem_16817452702758.png"/></div>
+    <div class="beauty-item-img-name">Крем для зоны декольте</div>
+    <div class="beauty-item-dscr"><p>Свежая и чувственная текстура крема тает на коже и быстро впитывается, оставляя после себя ощущение гладкости и упругости зоны декольте. </p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        крем обладает push-up-эффектом
+      </li>
+      <li>
+        был разработан специально для шеи и декольте
+      </li>
+      <li>  
+        подтягивает кожу шеи и груди изнутри, разглаживает морщины и сохраняет молодость и упругость бюста
+      </li>
+      <li>
+        отлично увлажняет
+      </li>
+      <li>
+        предотвращает появление морщин
+      </li>
+      <li>
+        усиливает защитный барьер кожи
+      </li>
+      <li>
+        подтягивает контуры
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Равномерно нанесите достаточное количество питательного крема на тщательно очищенную зону декольте, шею и бюст мягкими массирующими движениями.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/molochko_16802541661589.png"/></div>
+    <div class="beauty-item-img-name">Молочко для тела</div>
+    <div class="beauty-item-dscr"><p>Молочко быстро впитывается в кожные покровы, не забивая поры и не оставляя на теле жирную пленку. Восстанавливает упругость кожи тела, делает кожу шелковистой, защищает от клеточного старения и увядания.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        способствует выработке собственного эластина и коллагена
+      </li>
+      <li>
+        обладает эффектом регенерации, благодаря которому тело чувствует себя обновленным
+      </li>
+      <li>  
+        обеспечивает:
+        <ul>
+          <li>
+            питание
+          </li>
+          <li>
+            увлажнение
+          </li>
+          <li>
+            уплотнение
+          </li>
+          <li>
+            упругость и мягкость
+          </li>
+          <li>
+            заживление ранок и царапин
+          </li>
+          <li>
+            защиту от оксидативного стресса (UV-лучи, загрязнение воздуха)
+          </li>
+        </ul>
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Наносить утром и/или вечером легкими круговыми движениями на хорошо очищенную кожу, дать впитаться.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/2-v-1-eliksir-bol-shoy_16802542256417.png"/></div>
+    <div class="beauty-item-img-name">2 в 1 спрей-эликсир для лица</div>
+    <div class="beauty-item-dscr"><p>Освежающий спрей для лица богат высокоэффективными компонентами и питательными веществами. Он способен заметно изменить внешний вид кожи, увлажнить её, придать сияние и усилить выработку коллагена.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        один «пшик» защитит кожу от вредного воздействия окружающей среды
+      </li>
+      <li>
+        спрей очень эффективен, он  обволакивает кожу невидимой защитной пленкой и таким образом предотвращает проникновение свободных радикалов, смога и вредных веществ
+      </li>
+      <li>  
+        нежно воздействует на кожу
+      </li>
+      <li>
+        снабжает кожу гиалуроном
+      </li>
+      <li>
+        приятный “удар” свежести в сухих помещениях и в жаркие летние дни
+      </li>
+      <li>
+        укрепляет и фиксирует макияж
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Распылите эликсир на кожу лица, шеи и декольте перед выходом из дома или просто когда вам захочется свежести и сияния.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/222222_____2-v-1-eliksir-malen-kiy-1_16802684931644.png"/></div>
+    <div class="beauty-item-img-name">2 в 1 спрей-эликсир для лица (30 мл)</div>
+    <div class="beauty-item-dscr"><p>Travel-формат освежающего спрея для лица богат высокоэффективными компонентами и питательными веществами. Он способен заметно изменить внешний вид кожи, увлажнить её, придать сияние и усилить выработку коллагена. </p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        удобный формат, который удобно взять с собой
+      <li>
+        один «пшик» защитит кожу от вредного воздействия окружающей среды
+      </li>
+      <li>  
+        спрей очень эффективен, он  обволакивает кожу невидимой защитной пленкой и таким образом предотвращает проникновение свободных радикалов, смога и вредных веществ
+      </li>
+      <li>
+        нежно воздействует на кожу
+      </li>
+      <li>
+        снабжает кожу гиалуроном
+      </li>
+      <li>
+        приятный “удар” свежести в сухих помещениях и в жаркие летние дни
+      </li>
+      <li>
+        укрепляет и фиксирует макияж
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Распылите эликсир на кожу лица, шеи и декольте перед выходом из дома или просто когда вам захочется свежести и сияния. </p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/222222______serum-eleksir-1_16802684420221.png"/></div>
+    <div class="beauty-item-img-name">Магический сывороточный эликсир</div>
+    <div class="beauty-item-dscr"><p>Магический сывороточный эликсир BEAUTY® – это гибрид сыворотки и эмульсии для быстрых и интенсивных процедур ухода. Он эффективен, как сыворотка, легкий, как эмульсия, комфортный, как крем. Связывает влагу во всех слоях кожи, восстанавливает межклеточный цемент. <br/> <br/> Сыворотка «выталкивает морщины» и создает внутренний каркас кожи, обеспечивает мощный антивозрастной эффект, укрепляя внеклеточный матрикс и воздействуя на все структуры кожи. </p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        рекомендуется для всех типов кожи, идеально подходит для ухода за чувствительной, склонной к покраснению кожей
+      <li>
+        запатентованные  активные ингредиенты  быстро разглаживают существующие мимические морщины, подтягивают обвисшие контуры лица
+      </li>
+      <li>  
+        эффективно влияет на уставшую, дряблую кожу
+      </li>
+      <li>
+        сывороточный эликсир обладает успокаивающим и противовоспалительным эффектом, который может быть особенно полезен для раздраженной и уставшей кожи
+      </li>
+      <li>
+        обеспечивает видимый лифтинг-эффект
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Тщательно очистите кожу пенкой и очищающим молочком BEAUTY®. Обработайте кожу тоником, чтобы стабилизировать pH-уровень кожи. И пока кожа еще влажная, нанесите небольшое количество сывороточного эликсира на лицо строго по массажным линиям. Подождите немного, пока средство впитается. После этого можно наносить крем или макияж.</p></div>
+    </div>
+  </article>
+  <div class="shop-about-btns">
+                    <a href="https://ru.aplgo.com/j/772654/acumullitsa/"><button><div class="text-wrapper">Перейти в магазин</div></button></a>
+    </div>
+
+    `;
+    window.history.replaceState('', '', currentUrl + 'beauty')
+    if (window.innerWidth > 574) document.querySelector('.dropdown').style.display = 'none';
+    window.scrollTo(0, 0)
+    document.querySelectorAll('.usage-button').forEach((el) => el.addEventListener('click', (event) => {
+        event.target.nextElementSibling.classList.toggle('show')
+    }))
+    
+    footer.style.position = 'static'
+}
+
+
+if (document.referrer == (currentUrl + "accumulitsa/")) aboutAccSa();
+if (document.referrer == (currentUrl + "beauty/")) aboutBeauty();
+if (document.referrer == (currentUrl + "americano-cofee/")) aboutCofee();
+if (document.referrer == (currentUrl + "company/")) aboutCompany();
+if (document.referrer == (currentUrl + "travels/")) travelling();

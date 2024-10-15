@@ -1,14 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="keywords" content="APLGO, Восстановление Организма">
+    <style>
+        @font-face {
+    font-family: 'Intern';
+    src: url(../Inter-VariableFont_slnt_wght.ttf);
+}
+    </style>
+    
+    <link rel="preload" href="../Inter-VariableFont_slnt_wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="canonical" href=""/> <!-- Site page with identical text for search engine indexation  -->
+    <link rel="alternate" hreflang="xx-YY" href="URL" /> <!-- Indicate site version on another language to search engine. xx - language code acording to ISO 639-1, YY - Region code according to ISO 3166-1 Alpha 2-->
+    <link rel="stylesheet" href="../bootstrap.min.css"/>
+    <link rel="stylesheet" href="styles.css"/>
+    <title>APLGO | Восстановление Организма</title>
+    <meta name="description" content="Продукция APLGO-разработанная итальянскими ученными, это  нано-технология Acumullit SA — эксклюзивная разработка в сфере клеточного питания и омоложения  организма. Она на клеточном уровне распознает и «чинит» поврежденные клетки организма до полного восстановления. Применяется -  для всех возрастов, противопоказаний не имеет. Продукт можно купить более чем 85 странах мира."/>
+    <link rel="icon" href="media/main-page/images/main-page/ordinary-slogan.png">
+    <link rel="">
 </head>
-<body>
-    <script>
-        const currentURl = window.location.href;
-        window.location.href = currentURl.replace("/company","");
-    </script>
+<body tabindex="0">
+    <div class="burger-menu-background"></div>
+    <div class="burger-menu">
+        <nav class="main-header-burger">
+            <div class="main-header-burger-wrapper">
+                <div class="main-header-burger-nav-btn"><button class="main-header-burger-btn" onclick="clickBurgerMenu();mainPage();">Главная</button></div>
+                <div class="main-header-burger-nav-btn">
+                    <button class="main-header-burger-btn btn-about-products" onclick="showBurgerDropBtnsOfAboutProducts();">О продукции</button>
+                    <button class="burger-dropdown-btn" onclick="clickBurgerMenu(); aboutAccSa();">Про Драже Acumulit SA</button>
+                    <button class="burger-dropdown-btn" onclick="clickBurgerMenu();aboutBeauty();">Про Косметику Beauty</button>
+                    <button class="burger-dropdown-btn" onclick="clickBurgerMenu();aboutCofee();">Про кофе Americano</button>
+                </div>
+                <div class="main-header-burger-nav-btn"><button class="main-header-burger-btn" onclick="clickBurgerMenu();aboutCompany();">О компании</button></div>
+                <div class="main-header-burger-nav-btn"><button class="main-header-burger-btn" onclick="clickBurgerMenu();travelling();">Путешествия</button></div>
+                <div class="main-header-burger-nav-btn">
+                    <button class="main-header-burger-btn contacts" onclick="showBurgerDropBtnsOfContacts();">Контакты</button>
+                    <div class="burger-dropdown-btn"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/call-icon.png" style="vertical-align: midldle;" /><span class="contact-header-text">+380505578571</span></div>
+                    <div class="burger-dropdown-btn"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/email.png" style="vertical-align: midldle;" /><span class="contact-header-text mail">ola777ola7777@gmail.com</span></div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="wrapper">
+        <!-- <div class="contact-header">
+            <div class="contact-header-phone-number">
+                <img src="../../media/main-page/images/main-page/contacts/phone.svg" width="18" style="vertical-align: middle"/>
+                <span class="contact-header-text">+38050557851 - Telegram, Viber</span></div>
+            <div class="contact-header-email"><img src="../../media/main-page/images/main-page/contacts/email.svg" width="22" style="display: inline-block; vertical-align: middle;"/><span class="contact-header-text">olgabaeva@gmail.com</span></div>
+        </div> -->
+        <div id="void-prop"></div>
+        <nav class="main-header" id="main-header">
+            <img class="logo" src="../media/main-page/images/main-page/slogan5.png" width="215" height="77">
+            <div class="nav-btns">
+                <div class="nav-btn"><button class="dropbtn" onclick="mainPage()">Главная</button>
+                </div>
+                <div class="nav-btn" id="about-products">
+                    <button class="dropbtn">О продукции</button>
+                    <div class="dropdown" id="dropdown">
+                        <button class="link-btn" onclick="aboutAccSa();" style="margin: 0;">Про Драже Acumulit SA</button>
+                        <button class="link-btn" style="margin: 0;" onclick="aboutBeauty()">Про Косметику Beauty</button>
+                        <button class="link-btn" onclick="aboutCofee()" style="margin: 0;">Про кофе Americano</button>
+                    </div>
+                </div>
+                <div class="nav-btn">
+                    <button class="dropbtn" onclick="aboutCompany()">О компании</button></div>
+                <div class="nav-btn">
+                    <button class="dropbtn" onclick="travelling()">Путешествия</button></div>
+            </div>
+            <div class="nav-btn contacts">
+                    <button class="dropbtn">Контакты</button>
+                    <div class="dropdown-contact" id="dropdown">
+                        <div class="nav-btn contact"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/call-icon.png" style="vertical-align: midldle;" /><span class="contact-header-text">+380505578571</span></div>
+                        <div class="nav-btn contact"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/email.png" style="vertical-align: midldle;" /><span class="contact-header-text">ola777ola7777@gmail.com</span></div>
+                    </div>
+                </div>
+        </nav>
+        <div class="content">
+            <div class="youtube-video-wrapper about-company">
+    <div class="youtube-video-container">
+        <iframe class="youtube-video about-company" width="560" src="https://www.youtube.com/embed/NG2b-Vm9dxI?si=iJtxSZmG-YEgA7l5&amp;end=52" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+        </div>
+    </div>
+        <footer>
+            <p style="text-align: center;">© 2011 - 2024. Сайт партнёра APLGO. Не являеться официальным сайтом компании APLGO. <br/>ТОВ «АПЛГО УКР» 65007, Одеська обл., м. Одеса, вул. Новощіпний ряд, буд. 15/17</p>
+        </footer>
+    </div>
+    <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script src="../worker.js"></script>
 </body>
 </html>

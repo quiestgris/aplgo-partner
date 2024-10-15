@@ -1,14 +1,423 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="keywords" content="APLGO, Восстановление Организма">
+    <style>
+        @font-face {
+    font-family: 'Intern';
+    src: url(../Inter-VariableFont_slnt_wght.ttf);
+}
+    </style>
+    
+    <link rel="preload" href="../Inter-VariableFont_slnt_wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="canonical" href=""/> <!-- Site page with identical text for search engine indexation  -->
+    <link rel="alternate" hreflang="xx-YY" href="URL" /> <!-- Indicate site version on another language to search engine. xx - language code acording to ISO 639-1, YY - Region code according to ISO 3166-1 Alpha 2-->
+    <link rel="stylesheet" href="../bootstrap.min.css"/>
+    <link rel="stylesheet" href="styles.css"/>
+    <title>APLGO | Восстановление Организма</title>
+    <meta name="description" content="Продукция APLGO-разработанная итальянскими ученными, это  нано-технология Acumullit SA — эксклюзивная разработка в сфере клеточного питания и омоложения  организма. Она на клеточном уровне распознает и «чинит» поврежденные клетки организма до полного восстановления. Применяется -  для всех возрастов, противопоказаний не имеет. Продукт можно купить более чем 85 странах мира."/>
+    <link rel="icon" href="media/main-page/images/main-page/ordinary-slogan.png">
+    <link rel="">
 </head>
-<body>
-    <script>
-        const currentURl = window.location.href;
-        window.location.href = currentURl.replace("/beauty","");
-    </script>
+<body tabindex="0">
+    <div class="burger-menu-background"></div>
+    <div class="burger-menu">
+        <nav class="main-header-burger">
+            <div class="main-header-burger-wrapper">
+                <div class="main-header-burger-nav-btn"><button class="main-header-burger-btn" onclick="clickBurgerMenu();mainPage();">Главная</button></div>
+                <div class="main-header-burger-nav-btn">
+                    <button class="main-header-burger-btn btn-about-products" onclick="showBurgerDropBtnsOfAboutProducts();">О продукции</button>
+                    <button class="burger-dropdown-btn" onclick="clickBurgerMenu(); aboutAccSa();">Про Драже Acumulit SA</button>
+                    <button class="burger-dropdown-btn" onclick="clickBurgerMenu();aboutBeauty();">Про Косметику Beauty</button>
+                    <button class="burger-dropdown-btn" onclick="clickBurgerMenu();aboutCofee();">Про кофе Americano</button>
+                </div>
+                <div class="main-header-burger-nav-btn"><button class="main-header-burger-btn" onclick="clickBurgerMenu();aboutCompany();">О компании</button></div>
+                <div class="main-header-burger-nav-btn"><button class="main-header-burger-btn" onclick="clickBurgerMenu();travelling();">Путешествия</button></div>
+                <div class="main-header-burger-nav-btn">
+                    <button class="main-header-burger-btn contacts" onclick="showBurgerDropBtnsOfContacts();">Контакты</button>
+                    <div class="burger-dropdown-btn"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/call-icon.png" style="vertical-align: midldle;" /><span class="contact-header-text">+380505578571</span></div>
+                    <div class="burger-dropdown-btn"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/email.png" style="vertical-align: midldle;" /><span class="contact-header-text mail">ola777ola7777@gmail.com</span></div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="wrapper">
+        <!-- <div class="contact-header">
+            <div class="contact-header-phone-number">
+                <img src="../../media/main-page/images/main-page/contacts/phone.svg" width="18" style="vertical-align: middle"/>
+                <span class="contact-header-text">+38050557851 - Telegram, Viber</span></div>
+            <div class="contact-header-email"><img src="../../media/main-page/images/main-page/contacts/email.svg" width="22" style="display: inline-block; vertical-align: middle;"/><span class="contact-header-text">olgabaeva@gmail.com</span></div>
+        </div> -->
+        <div id="void-prop"></div>
+        <nav class="main-header" id="main-header">
+            <img class="logo" src="../media/main-page/images/main-page/slogan5.png" width="215" height="77">
+            <div class="nav-btns">
+                <div class="nav-btn"><button class="dropbtn" onclick="mainPage()">Главная</button>
+                </div>
+                <div class="nav-btn" id="about-products">
+                    <button class="dropbtn">О продукции</button>
+                    <div class="dropdown" id="dropdown">
+                        <button class="link-btn" onclick="aboutAccSa();" style="margin: 0;">Про Драже Acumulit SA</button>
+                        <button class="link-btn" style="margin: 0;" onclick="aboutBeauty()">Про Косметику Beauty</button>
+                        <button class="link-btn" onclick="aboutCofee()" style="margin: 0;">Про кофе Americano</button>
+                    </div>
+                </div>
+                <div class="nav-btn">
+                    <button class="dropbtn" onclick="aboutCompany()">О компании</button></div>
+                <div class="nav-btn">
+                    <button class="dropbtn" onclick="travelling()">Путешествия</button></div>
+            </div>
+            <div class="nav-btn contacts">
+                    <button class="dropbtn">Контакты</button>
+                    <div class="dropdown-contact" id="dropdown">
+                        <div class="nav-btn contact"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/call-icon.png" style="vertical-align: midldle;" /><span class="contact-header-text">+380505578571</span></div>
+                        <div class="nav-btn contact"><img class="contact-header-text-img" src="../../media/main-page/images/main-page/contacts/email.png" style="vertical-align: midldle;" /><span class="contact-header-text">ola777ola7777@gmail.com</span></div>
+                    </div>
+                </div>
+        </nav>
+        <div class="content">
+            <div class="beauty-technologies">
+    <h1>3 эксклюзивные технологии нашей косметики</h1>
+    <p class="beauty-technology"><span>EARLY BOOST®</span> – уникальный источник растительного таурина, полученный из экстракта водоросли Jania Rubéns. Его косметические свойства просто невероятны! Он заряжает клетки кожи энергией, сохраняет заряд молодости, задерживает проявление первых признаков старения. Энергия — это и есть молодость. Поэтому она есть в составе BEAUTY®</p>
+    <hr/>
+    <p class="beauty-technology"><span>SYN®-AKE*</span> – это активный ингредиент, борющийся с морщинами, его свойства сходны со змеиным ядом. Но это не должно вас пугать. Индустрия красоты использует этот новый чудодейственный продукт для расслабления мышц лица и противодействия образованию морщин. Около 60 мышц лица заботятся о нашей мимике, и они работают на полной скорости каждый день. С 25 лет их работа начинает предательски отпечатываться на нашем лице. SYN®-AKE* предназначен для мгновенного и продолжительного расслабления мышц лица и сведения морщин к минимуму.</p>
+    <hr/>
+    <p class="beauty-technology"><span>Gatuline® Expression</span> – это своеобразный «природный ботокс», который мгновенно улучшает контур глаз и лица, борется с мимическими, гравитационными и возрастными морщинами. Gatuline® Expression сертифицирован как натуральный COSMOS/ECOCERT, NPA и NSF.</p>
+  </div>
+  <h2 class="heading-of-level-2">Какие есть средства в Beauty Natural Series?<h2>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/krem-dlya-lica_1681745301981.png"/></div>
+    <div class="beauty-item-img-name">Крем для лица</div>
+    <div class="beauty-item-dscr"><p>Крем мягко воздействует, успокаивает, увлажняет, питает, разглаживает, делает контур лица более четким. При регулярном применении дает отличный антивозрастной эффект, воздействуя на три фактора старения кожи, связанные с генетикой, воздействием окружающей среды и образом жизни.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        сохраняет и увеличивает капитал молодости кожи, предлагает ей оптимальную долгосрочную защиту;
+      </li>
+      <li>
+        обеспечивает уплотнение кожи, восстановление и свежесть
+      </li>
+      <li>  
+        защищает от оксидативного стресса (загрязнения воздуха)
+      </li>
+      <li>
+        предотвращает появление первых морщин
+      </li>
+      <li>
+        помогает поддерживать тургор, водный и энергетический баланс всех слоев кожи лица
+      </li>
+      <li>
+        имеет anti-age-эффект с накопительным действием
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Крем следует наносить легкими движениями по массажным линиям утром и/или вечером на хорошо очищенные лицо и шею, дать впитаться. Через час обязательно промокнуть остатки крема сухой салфеткой.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/krem-dlya-vek_16817452399446.png"/></div>
+    <div class="beauty-item-img-name">Крем для век</div>
+    <div class="beauty-item-dscr"><p>Крем разработан с учетом чувствительной кожи вокруг глаз, который подходит всем типам кожи. Он бережно восстанавливает упругость, придает коже вокруг глаз сияние и долговременно борется с признаками старения.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        разглаживает и успокаивает кожу вокруг глаз
+      </li>
+      <li>
+        уменьшает «гусиные лапки» и другие мимические морщинки;
+      </li>
+      <li>  
+        обеспечивает видимый лифтинг-эффект, питание, увлажнение, anti-age-эффект с накопительным действием;
+      </li>
+      <li>
+        «стирает» круги и мешки под глазами, а также следы усталости;
+      </li>
+      <li>
+        эффективно борется с мелкими морщинками, обезвоживанием кожи и отеками под глазами;
+      </li>
+      <li>
+        противостоит иссушению кожи, дает ощущение комфорта и свежести.
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Рекомендуем наносить крем легкими похлопывающими движениями утром и/или вечером на хорошо очищенную кожу вокруг глаз. Двигайтесь по костному краю верхнего и нижнего века от переносицы к вискам. Вечером рекомендуется наносить крем для век не позднее, чем за час до сна, чтобы крем успел поработать, пока активны ваши мышцы</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/penka_16802539681.png"/></div>
+    <div class="beauty-item-img-name">Пенка для умывания</div>
+    <div class="beauty-item-dscr"><p>Мягкая очищающая пена идеально удаляет весь классический макияж, глубоко проникает в поры, расслабляет кожу и обеспечивает оптимальную основу для последующего ухода.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        имеет воздушную, приятную текстуру, превращает процесс очищения в сплошное удовольствие
+      </li>
+      <li>
+        эффективно удаляет макияж и готовит кожу к последующему уходу
+      </li>
+      <li>  
+        расслабляет кожу, борется с морщинками
+      </li>
+      <li>
+        идеально подходит для ежедневного применения
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Нанесите на ладонь небольшое количество нежной очищающей пены (размером с грецкий орех) и равномерно распределите ее по ладоням. Затем нанесите на очищаемые участки, аккуратно помассируйте лицо. Смойте пену теплой водой. 
+Рекомендуется для ежедневного очищения</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/molochko-dlya-lica_16802539899073.png"/></div>
+    <div class="beauty-item-img-name">Молочко для лица</div>
+    <div class="beauty-item-dscr"><p>Молочко бережно удаляет макияж, наполняет кожу комфортом. Нежная очищающая кремовая эмульсия приятной консистенции не содержит агрессивных ингредиентов и уже на этапе очищения питает и увлажняет кожу.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        роскошная легкая текстура молочка мягко очищает чувствительную кожу, снимает макияж, удаляет грязь и жир, накопившиеся за день
+      </li>
+      <li>
+        средство оказывает дополнительное увлажняющее и успокаивающее действие на кожу лица и шеи
+      </li>
+      <li>  
+       активные вещества дают коже необходимую основу для последующей программы ухода
+      <li>
+        при длительном использовании кожа выглядит свежей, молодой и здоровой
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Равномерно нанесите молочко кончиками пальцев на очищаемые участки кожи. Нежно вмассируйте и протрите остатки спонжем или мягкой косметической салфеткой. После очищения рекомендуем освежить кожу тоником для лица BEAUTY®.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/tonik-dlya-lica_16802540336829.png"/></div>
+    <div class="beauty-item-img-name">Тоник для лица</div>
+    <div class="beauty-item-dscr"><p>Роскошный тоник для лица с нейтрализующим и успокаивающим действием придает вашему цвету лица сияющий и свежий вид. Лосьон удаляет остатки молочка, жесткой воды, извести. Кожа чувствует себя особенно свежей.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        прекрасное завершение этапа очищения кожи
+      </li>
+      <li>
+        тоник имеет уникальную формулу и идеально подходит для чувствительной и сухой кожи (не содержит алкоголя)
+      </li>
+      <li>  
+       кожа выглядит свежей уже после первого применения
+      <li>
+        значение pH стабилизируется быстрее после мягкого очищения
+      </li>
+      <li>
+        тоник подходит для компрессов для глаз
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Наносите тоник ватным тампоном или кончиками пальцев на лицо и шею/декольте ежедневно после очищения. Этот этап увеличит эффективность всей серии косметики BEAUTY®</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/shelkovaya-maska_16817453454547.png"/></div>
+    <div class="beauty-item-img-name">Шелковая маска для лица</div>
+    <div class="beauty-item-dscr"><p>Незабываемая гладкость и свежесть лица после применения маски очаровывает. Этот этап защищает кожу от окислительного стресса, обеспечивает ее биологическое равновесие, оказывает заметный антивозрастной эффект. </p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        всего за 15 минут эта маска способна сделать кожу заметно моложе благодаря ее мгновенному эффекту лифтинга
+      </li>
+      <li>
+        высокоэффективные вещества, содержащиеся в основе маски, обеспечивают коже необходимое увлажнение, помогают повысить естественное содержание коллагена и возвращают коже прежнюю эластичность
+      </li>
+      <li>  
+        специальный комплекс бережно отшелушивает кожу, что гарантирует глубокое проникновение активных ингредиентов
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Наносите маску после тщательного очищения или после пилинга. Распределите средство равномерно, избегая области вокруг глаз. Наслаждайтесь её шелковым прикосновением 15 минут, затем смойте теплой водой или удалите маску мягкой косметической салфеткой.<br/>
+Для равномерного нанесения воспользуйтесь косметической кисточкой.
+После маски мы рекомендуем нанести крем BEAUTY® для достижения максимального омолаживающего эффекта.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/dekol-te-krem_16817452702758.png"/></div>
+    <div class="beauty-item-img-name">Крем для зоны декольте</div>
+    <div class="beauty-item-dscr"><p>Свежая и чувственная текстура крема тает на коже и быстро впитывается, оставляя после себя ощущение гладкости и упругости зоны декольте. </p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        крем обладает push-up-эффектом
+      </li>
+      <li>
+        был разработан специально для шеи и декольте
+      </li>
+      <li>  
+        подтягивает кожу шеи и груди изнутри, разглаживает морщины и сохраняет молодость и упругость бюста
+      </li>
+      <li>
+        отлично увлажняет
+      </li>
+      <li>
+        предотвращает появление морщин
+      </li>
+      <li>
+        усиливает защитный барьер кожи
+      </li>
+      <li>
+        подтягивает контуры
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Равномерно нанесите достаточное количество питательного крема на тщательно очищенную зону декольте, шею и бюст мягкими массирующими движениями.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/molochko_16802541661589.png"/></div>
+    <div class="beauty-item-img-name">Молочко для тела</div>
+    <div class="beauty-item-dscr"><p>Молочко быстро впитывается в кожные покровы, не забивая поры и не оставляя на теле жирную пленку. Восстанавливает упругость кожи тела, делает кожу шелковистой, защищает от клеточного старения и увядания.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        способствует выработке собственного эластина и коллагена
+      </li>
+      <li>
+        обладает эффектом регенерации, благодаря которому тело чувствует себя обновленным
+      </li>
+      <li>  
+        обеспечивает:
+        <ul>
+          <li>
+            питание
+          </li>
+          <li>
+            увлажнение
+          </li>
+          <li>
+            уплотнение
+          </li>
+          <li>
+            упругость и мягкость
+          </li>
+          <li>
+            заживление ранок и царапин
+          </li>
+          <li>
+            защиту от оксидативного стресса (UV-лучи, загрязнение воздуха)
+          </li>
+        </ul>
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Наносить утром и/или вечером легкими круговыми движениями на хорошо очищенную кожу, дать впитаться.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/2-v-1-eliksir-bol-shoy_16802542256417.png"/></div>
+    <div class="beauty-item-img-name">2 в 1 спрей-эликсир для лица</div>
+    <div class="beauty-item-dscr"><p>Освежающий спрей для лица богат высокоэффективными компонентами и питательными веществами. Он способен заметно изменить внешний вид кожи, увлажнить её, придать сияние и усилить выработку коллагена.</p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        один «пшик» защитит кожу от вредного воздействия окружающей среды
+      </li>
+      <li>
+        спрей очень эффективен, он  обволакивает кожу невидимой защитной пленкой и таким образом предотвращает проникновение свободных радикалов, смога и вредных веществ
+      </li>
+      <li>  
+        нежно воздействует на кожу
+      </li>
+      <li>
+        снабжает кожу гиалуроном
+      </li>
+      <li>
+        приятный “удар” свежести в сухих помещениях и в жаркие летние дни
+      </li>
+      <li>
+        укрепляет и фиксирует макияж
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Распылите эликсир на кожу лица, шеи и декольте перед выходом из дома или просто когда вам захочется свежести и сияния.</p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/222222_____2-v-1-eliksir-malen-kiy-1_16802684931644.png"/></div>
+    <div class="beauty-item-img-name">2 в 1 спрей-эликсир для лица (30 мл)</div>
+    <div class="beauty-item-dscr"><p>Travel-формат освежающего спрея для лица богат высокоэффективными компонентами и питательными веществами. Он способен заметно изменить внешний вид кожи, увлажнить её, придать сияние и усилить выработку коллагена. </p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        удобный формат, который удобно взять с собой
+      <li>
+        один «пшик» защитит кожу от вредного воздействия окружающей среды
+      </li>
+      <li>  
+        спрей очень эффективен, он  обволакивает кожу невидимой защитной пленкой и таким образом предотвращает проникновение свободных радикалов, смога и вредных веществ
+      </li>
+      <li>
+        нежно воздействует на кожу
+      </li>
+      <li>
+        снабжает кожу гиалуроном
+      </li>
+      <li>
+        приятный “удар” свежести в сухих помещениях и в жаркие летние дни
+      </li>
+      <li>
+        укрепляет и фиксирует макияж
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Распылите эликсир на кожу лица, шеи и декольте перед выходом из дома или просто когда вам захочется свежести и сияния. </p></div>
+    </div>
+  </article>
+  <article class="beauty-item">
+    <div class="beauty-item-img"><img src="../media/main-page/images/main-page/main-page-categories/beauty/beauty-products/222222______serum-eleksir-1_16802684420221.png"/></div>
+    <div class="beauty-item-img-name">Магический сывороточный эликсир</div>
+    <div class="beauty-item-dscr"><p>Магический сывороточный эликсир BEAUTY® – это гибрид сыворотки и эмульсии для быстрых и интенсивных процедур ухода. Он эффективен, как сыворотка, легкий, как эмульсия, комфортный, как крем. Связывает влагу во всех слоях кожи, восстанавливает межклеточный цемент. <br/> <br/> Сыворотка «выталкивает морщины» и создает внутренний каркас кожи, обеспечивает мощный антивозрастной эффект, укрепляя внеклеточный матрикс и воздействуя на все структуры кожи. </p></div>
+    <div class="beauty-item-list-name">Преимущества:</div>
+    <ol class="beauty-item-advantages">
+      <li>
+        рекомендуется для всех типов кожи, идеально подходит для ухода за чувствительной, склонной к покраснению кожей
+      <li>
+        запатентованные  активные ингредиенты  быстро разглаживают существующие мимические морщины, подтягивают обвисшие контуры лица
+      </li>
+      <li>  
+        эффективно влияет на уставшую, дряблую кожу
+      </li>
+      <li>
+        сывороточный эликсир обладает успокаивающим и противовоспалительным эффектом, который может быть особенно полезен для раздраженной и уставшей кожи
+      </li>
+      <li>
+        обеспечивает видимый лифтинг-эффект
+      </li>
+    </ol>
+    <div class="beauty-item-usage">
+      <button class="usage-button">Применение</button>
+      <div class="usage"><p>Тщательно очистите кожу пенкой и очищающим молочком BEAUTY®. Обработайте кожу тоником, чтобы стабилизировать pH-уровень кожи. И пока кожа еще влажная, нанесите небольшое количество сывороточного эликсира на лицо строго по массажным линиям. Подождите немного, пока средство впитается. После этого можно наносить крем или макияж.</p></div>
+    </div>
+  </article>
+  <div class="shop-about-btns">
+                    <a href="https://ru.aplgo.com/j/772654/acumullitsa/"><button><div class="text-wrapper">Перейти в магазин</div></button></a>
+    </div>
+            </div>
+        <footer>
+            <p style="text-align: center;">© 2011 - 2024. Сайт партнёра APLGO. Не являеться официальным сайтом компании APLGO. <br/>ТОВ «АПЛГО УКР» 65007, Одеська обл., м. Одеса, вул. Новощіпний ряд, буд. 15/17</p>
+        </footer>
+    </div>
+    <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    <script src="../worker.js"></script>
 </body>
 </html>
