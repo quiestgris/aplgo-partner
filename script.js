@@ -255,8 +255,9 @@ function checkWindowWidth() {
         let newHeader = document.createElement("div")
         newHeader.classList.add("img-logo-container")
         window.removeEventListener('scroll', headerTransformation)
-        voidProp.replaceWith(newHeader)
         newHeader.innerHTML = `<img class="logo" src="../media/main-page/images/main-page/slogan5.png">`;
+        // voidProp.replaceWith(newHeader)
+        voidProp.parentNode.replaceChild(newHeader, voidProp);
         mainHeader.innerHTML = `
        <button class="mobile-menu" onclick="clickBurgerMenu();">Меню</button> 
     <!--<div class="burger" onclick="clickBurgerMenu()">
