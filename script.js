@@ -217,15 +217,12 @@ window.addEventListener('scroll', headerTransformation);
 voidProp.style.height = mainHeader.offsetHeight + 'px';
 // voidProp.style.width = mainHeader.offsetWidth + 'px';
 voidProp.style.marginBottom = 28 + 'px'
+
+document.addEventListener('DOMContentLoaded', () => {
+    checkWindowWidth();
+});
+
 function checkWindowWidth() {
-    if (window.innerWidth <= 926)
-        voidProp.style.marginBottom = 28 + 'px'
-    if (window.innerWidth <= 753) {
-        voidProp.style.marginBottom = '20px'
-    }
-    if (window.innerWidth <= 713) {
-        voidProp.style.marginBottom = '12px'
-    }
     if (window.innerWidth <= 574) {
         window.overflowY = "hidden"
         let newHeader = document.createElement("div")
@@ -233,7 +230,7 @@ function checkWindowWidth() {
         removingContactsByclickingOnAnotherPlace = null;
         window.removeEventListener('scroll', headerTransformation)
         voidProp.replaceWith(newHeader)
-        newHeader.innerHTML = `<img class="logo" src="media/main-page/images/main-page/slogan5.png">`;
+        newHeader.innerHTML = `<img class="logo" src="../media/main-page/images/main-page/slogan5.png">`;
         mainHeader.innerHTML = `
        <button class="mobile-menu" onclick="clickBurgerMenu();">Меню</button> 
     <!--<div class="burger" onclick="clickBurgerMenu()">
@@ -250,14 +247,16 @@ function checkWindowWidth() {
         document.querySelectorAll('.usage-button').forEach((el) => el.addEventListener('touchstart', (event) => {
         event.target.nextElementSibling.classList.toggle('show')
         }))
-//         if (window.innerWidth >= 568 && window.innerWidth <= 574) {
-//     document.querySelector('.burger-menu').style.left = '4%';
-// }
-// else {
-//     document.querySelector('.burger-menu').style.left = '47%';
-// }
         // document.querySelector('.burger').addEventListener('click', function () { document.querySelector('.burger').classList.toggle('transform-burger') })
     }
+    else if (window.innerWidth <= 713) {
+        voidProp.style.marginBottom = '12px'
+    }
+    else if (window.innerWidth <= 753) {
+        voidProp.style.marginBottom = '20px'
+    }
+    else if (window.innerWidth <= 926) {
+    voidProp.style.marginBottom = 28 + 'px'}
 }
 
 window.addEventListener("resize", function () { if(window.innerWidth <= 574) checkWindowWidth(); })
