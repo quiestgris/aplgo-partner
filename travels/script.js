@@ -1,7 +1,7 @@
 document.querySelectorAll('a').forEach(function (el) {
     el.setAttribute('target', '_blank');
 })
-
+checkWindowWidth();
 document.querySelector('.nav-btn.contacts').addEventListener('click', () => {
     document.querySelector('.dropdown-contact').classList.add('show')
     document.querySelector('.nav-btn.contacts button.dropbtn').style.backgroundColor = "#144616";
