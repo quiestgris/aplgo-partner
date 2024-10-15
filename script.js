@@ -255,7 +255,7 @@ function checkWindowWidth() {
         let newHeader = document.createElement("div")
         newHeader.classList.add("img-logo-container")
         window.removeEventListener('scroll', headerTransformation)
-        newHeader.innerHTML = `<img class="logo" src="../media/main-page/images/main-page/slogan5.png">`;
+        newHeader.innerHTML = `<img class="logo" src="/media/main-page/images/main-page/slogan5.png">`;
         // voidProp.replaceWith(newHeader)
         voidProp.parentNode.replaceChild(newHeader, voidProp);
         mainHeader.innerHTML = `
